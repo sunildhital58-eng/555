@@ -8,11 +8,15 @@ interface StaffMailboxesProps {
 
 export default function StaffMailboxes({ mailSystem }: StaffMailboxesProps) {
   const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'send' | 'access'>('send');
+  const [activeTab, setActiveTab] = useState<'send' | 'access' | 'manage'>('send');
   const [selectedMailboxAccess, setSelectedMailboxAccess] = useState<any>(null);
   const [mailboxPassword, setMailboxPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [viewingMessages, setViewingMessages] = useState(false);
+  const [managePassword, setManagePassword] = useState('');
+  const [isManageUnlocked, setIsManageUnlocked] = useState(false);
+  const [newMailboxName, setNewMailboxName] = useState('');
+  const [newMailboxEmail, setNewMailboxEmail] = useState('');
 
   const copyToClipboard = (email: string) => {
     navigator.clipboard.writeText(email);
@@ -51,10 +55,10 @@ export default function StaffMailboxes({ mailSystem }: StaffMailboxesProps) {
         </div>
 
         {/* Tab Buttons */}
-        <div className="flex gap-3 mb-8 border-b border-gray-200">
+        <div className="flex gap-3 mb-8 border-b border-gray-200 overflow-x-auto">
           <button
             onClick={() => { setActiveTab('send'); setSelectedMailboxAccess(null); }}
-            className={`pb-4 px-4 font-bold text-sm md:text-base transition-all flex items-center gap-2 ${
+            className={`pb-4 px-4 font-bold text-sm md:text-base transition-all flex items-center gap-2 whitespace-nowrap ${
               activeTab === 'send'
                 ? 'text-[#00A64C] border-b-2 border-[#00A64C]'
                 : 'text-gray-500 hover:text-gray-700'
@@ -64,13 +68,23 @@ export default function StaffMailboxes({ mailSystem }: StaffMailboxesProps) {
           </button>
           <button
             onClick={() => { setActiveTab('access'); setSelectedMailboxAccess(null); }}
-            className={`pb-4 px-4 font-bold text-sm md:text-base transition-all flex items-center gap-2 ${
+            className={`pb-4 px-4 font-bold text-sm md:text-base transition-all flex items-center gap-2 whitespace-nowrap ${
               activeTab === 'access'
                 ? 'text-[#00A64C] border-b-2 border-[#00A64C]'
                 : 'text-gray-500 hover:text-gray-700'
             }`}
           >
             <ShieldCheck className="size-5" /> Staff Mailbox Access
+          </button>
+          <button
+            onClick={() => { setActiveTab('manage'); setIsManageUnlocked(false); setManagePassword(''); }}
+            className={`pb-4 px-4 font-bold text-sm md:text-base transition-all flex items-center gap-2 whitespace-nowrap ${
+              activeTab === 'manage'
+                ? 'text-[#00A64C] border-b-2 border-[#00A64C]'
+                : 'text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            <Mail className="size-5" /> Manage Mailboxes
           </button>
         </div>
 
@@ -220,7 +234,145 @@ export default function StaffMailboxes({ mailSystem }: StaffMailboxesProps) {
           </div>
         )}
 
+        {/* Tab 3: Manage Mailboxes */}
+        {activeTab === 'manage' && (
+          <div className="space-y-6">
+            {!isManageUnlocked ? (
+              <div className="max-w-md mx-auto bg-gradient-to-br from-green-50 to-green-100 border border-green-300 rounded-2xl p-8">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Mailbox Management</h3>
+                <p className="text-gray-600 mb-6">Enter admin password to manage mailboxes</p>
+                
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 mb-2">Admin Password</label>
+                    <input
+                      type="password"
+                      value={managePassword}
+                      onChange={(e) => setManagePassword(e.target.value)}
+                      onKeyPress={(e) => e.key === 'Enter' && (managePassword === '123321' ? setIsManageUnlocked(true) : null)}
+                      placeholder="Enter admin password"
+                      className="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
+                  </div>
+                  
+                  <button
+                    onClick={() => {
+                      if (managePassword === '123321') {
+                        setIsManageUnlocked(true);
+                      } else {
+                        alert('Incorrect password');
+                      }
+                    }}
+                    className="w-full bg-[#00A64C] hover:bg-[#006830] text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors"
+                  >
+                    Unlock
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {/* Add Mailbox Form */}
+                <div className="bg-gradient-to-br from-green-50 to-green-100 border border-green-300 rounded-2xl p-6">
+                  <h3 className="font-bold text-gray-900 mb-4 text-lg flex items-center gap-2">
+                    <Mail className="size-5 text-green-600" /> Add New Mailbox
+                  </h3>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-xs font-bold text-gray-700 mb-2">Mailbox Name</label>
+                      <input
+                        type="text"
+                        value={newMailboxName}
+                        onChange={(e) => setNewMailboxName(e.target.value)}
+                        placeholder="e.g., Finance Department"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-gray-700 mb-2">Email Address</label>
+                      <input
+                        type="email"
+                        value={newMailboxEmail}
+                        onChange={(e) => setNewMailboxEmail(e.target.value)}
+                        placeholder="e.g., finance@hospital.com"
+                        className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                      />
+                    </div>
+                    <button
+                      onClick={() => {
+                        if (newMailboxName && newMailboxEmail) {
+                          const newMailbox = {
+                            id: Date.now().toString(),
+                            name: newMailboxName,
+                            email: newMailboxEmail,
+                            password: Math.random().toString(36).substring(2, 10),
+                            messages: []
+                          };
+                          // This will be handled by parent component to update Firebase
+                          window.dispatchEvent(new CustomEvent('addMailbox', { detail: newMailbox }));
+                          setNewMailboxName('');
+                          setNewMailboxEmail('');
+                          alert('Mailbox added! Please refresh the page to see changes.');
+                        }
+                      }}
+                      className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors"
+                    >
+                      Add Mailbox
+                    </button>
+                  </div>
+                </div>
+
+                {/* Mailbox Grid */}
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-4 text-lg">Current Mailboxes</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {mailSystem.mailboxes.map((mailbox) => (
+                      <div
+                        key={mailbox.id}
+                        className="bg-gradient-to-br from-[#f0fdf4] to-[#dcfce7] border border-[#00A64C]/20 rounded-2xl p-6"
+                      >
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="size-10 rounded-lg bg-[#00A64C]/10 text-[#00A64C] flex items-center justify-center">
+                            <Mail className="size-5" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h4 className="font-bold text-gray-900 text-sm">{mailbox.name}</h4>
+                          </div>
+                        </div>
+                        <p className="text-xs text-gray-600 mb-3 break-all">{mailbox.email}</p>
+                        <button
+                          onClick={() => {
+                            if (confirm(`Delete mailbox "${mailbox.name}"?`)) {
+                              window.dispatchEvent(new CustomEvent('deleteMailbox', { detail: mailbox.id }));
+                              alert('Mailbox deleted! Please refresh the page to see changes.');
+                            }
+                          }}
+                          className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-3 rounded-lg text-xs transition-colors"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Logout Button */}
+                <button
+                  onClick={() => {
+                    setIsManageUnlocked(false);
+                    setManagePassword('');
+                  }}
+                  className="w-full bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors"
+                >
+                  Logout from Management
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Info Box */}
+
         <div className="mt-12 bg-blue-50 border border-blue-200 rounded-2xl p-6 md:p-8">
           <h3 className="font-bold text-gray-900 mb-3 text-lg flex items-center gap-2">
             <Mail className="size-5 text-blue-600" />

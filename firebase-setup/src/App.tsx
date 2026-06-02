@@ -206,6 +206,37 @@ export default function App() {
     };
   }, []);
 
+  // Handle mailbox add/delete from website
+  useEffect(() => {
+    const handleAddMailbox = (e: any) => {
+      const newMailbox = e.detail;
+      const updated = {
+        ...mailSystem,
+        mailboxes: [...(mailSystem.mailboxes || []), newMailbox]
+      };
+      setMailSystem(updated);
+      saveToFirebase('mailSystem', updated);
+    };
+
+    const handleDeleteMailbox = (e: any) => {
+      const mailboxId = e.detail;
+      const updated = {
+        ...mailSystem,
+        mailboxes: (mailSystem.mailboxes || []).filter(m => m.id !== mailboxId)
+      };
+      setMailSystem(updated);
+      saveToFirebase('mailSystem', updated);
+    };
+
+    window.addEventListener('addMailbox', handleAddMailbox);
+    window.addEventListener('deleteMailbox', handleDeleteMailbox);
+
+    return () => {
+      window.removeEventListener('addMailbox', handleAddMailbox);
+      window.removeEventListener('deleteMailbox', handleDeleteMailbox);
+    };
+  }, [mailSystem]);
+
 
   // -------------------------------------------------------------
   // CONTROLLERS
@@ -2073,7 +2104,7 @@ export default function App() {
 ⏰ बुकिङ समय: ${meetTime}
 
 🏥 विभाग: ${meetDept || 'General Medicine'}
-🩺 विशेषज्ञ चिकित्सक: ${meetDocName || 'Specialist Officer'}
+🩺 विशेषज्ञ चिकित्��क: ${meetDocName || 'Specialist Officer'}
 ✉ बिरामीको गुनासो/लक्षण: ${meetMessage || 'N/A'}
 
 [यो बुकिङ अनुरोध अस्पतालको डिजिटल डेस्क वेबपेजबाट स्वचालित रूपमा तयार पारिएको हो। कृपय����� मेरो अपोइन्टमेन्ट समय निश्चित गरिदिनुहोला। ]`;
