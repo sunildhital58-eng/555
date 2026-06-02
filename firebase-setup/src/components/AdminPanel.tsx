@@ -71,7 +71,7 @@ export default function AdminPanel({
   machines, setMachines,
   onExit
 }: AdminPanelProps) {
-  const [activeSubTab, setActiveSubTab] = useState<'bookings' | 'services' | 'doctors' | 'about' | 'patients' | 'visitors' | 'gallery' | 'news' | 'prices' | 'settings' | 'password' | 'testimonials' | 'events' | 'qrCodes' | 'machines'>('bookings');
+  const [activeSubTab, setActiveSubTab] = useState<'bookings' | 'services' | 'doctors' | 'about' | 'patients' | 'visitors' | 'gallery' | 'news' | 'prices' | 'settings' | 'password' | 'testimonials' | 'events' | 'qrCodes' | 'machines' | 'mailbox'>('bookings');
 
   // Save changes & Backup state managers
   const [isSaving, setIsSaving] = useState(false);
@@ -575,6 +575,15 @@ export default function AdminPanel({
               }`}
             >
               <Calendar className="size-4" /> Hospital Event Schedules
+            </button>
+
+            <button
+              onClick={() => setActiveSubTab('mailbox')}
+              className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors cursor-pointer ${
+                activeSubTab === 'mailbox' ? 'bg-[#00A64C] text-white' : 'hover:bg-gray-800'
+              }`}
+            >
+              <Mail className="size-4" /> Staff Mailbox System
             </button>
 
             <button

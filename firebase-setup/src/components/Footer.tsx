@@ -110,6 +110,11 @@ export default function Footer({
                   • Photo Gallery
                 </button>
               </li>
+              <li>
+                <button onClick={() => setActiveTab('mailboxes')} className="hover:text-[#00A64C] transition-colors cursor-pointer text-left py-0.5 font-semibold">
+                  • Staff Mailboxes
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -139,7 +144,7 @@ export default function Footer({
               </ul>
             </div>
 
-            <div className="pt-2 text-xs">
+            <div className="pt-2 text-xs space-y-2">
               <button
                 onClick={onAdminClick}
                 className="w-full inline-flex items-center justify-center gap-1.5 bg-[#2d2d2d] hover:bg-[#00A64C] hover:text-white text-gray-300 font-bold px-3 py-2 rounded-lg border border-gray-700 transition-all cursor-pointer shadow-sm text-center text-[10px]"
@@ -147,6 +152,15 @@ export default function Footer({
                 <ShieldCheck className="size-3.5 text-emerald-400" />
                 Admin Panel Login
               </button>
+              <a
+                href="https://www.google.com/maps/search/Dhading+Hospital/@27.921823,84.918920"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-1.5 bg-[#2d2d2d] hover:bg-blue-600 hover:text-white text-gray-300 font-bold px-3 py-2 rounded-lg border border-gray-700 transition-all cursor-pointer shadow-sm text-center text-[10px]"
+              >
+                <MapPin className="size-3.5" />
+                View Hospital Location
+              </a>
             </div>
           </div>
 

@@ -18,6 +18,7 @@ import MainNavbar from './components/MainNavbar';
 import BannerSlider from './components/BannerSlider';
 import InquiryModal from './components/InquiryModal';
 import Footer from './components/Footer';
+import StaffMailboxes from './components/StaffMailboxes';
 import AdminPanel from './components/AdminPanel';
 import NewsDetailModal from './components/NewsDetailModal';
 
@@ -2879,6 +2880,13 @@ export default function App() {
             </div>
           );
         })()}
+
+        {/* Staff Mailboxes Tab View */}
+        {activeTab === 'mailboxes' && (
+          <div className="max-w-7xl mx-auto px-4 py-12">
+            <StaffMailboxes mailSystem={mailSystem} />
+          </div>
+        )}
 
         {/* Contact Tab View */}
         {activeTab === 'contact' && (
