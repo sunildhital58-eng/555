@@ -7,6 +7,7 @@ export interface ServiceItem {
 }
 
 export interface Services {
+  visitTime: ServiceItem[];
   opd: ServiceItem[];
   ipd: ServiceItem[];
   emergency: ServiceItem[];

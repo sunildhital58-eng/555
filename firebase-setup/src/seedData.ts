@@ -49,6 +49,20 @@ export const INITIAL_CATEGORIES: string[] = [
 ];
 
 export const INITIAL_SERVICES: Services = {
+  visitTime: [
+    {
+      id: 'visit-1',
+      title: 'OPD Visiting Hours',
+      text: 'Monday - Friday: 7:00 AM - 8:00 PM\nSaturday - Sunday: 10:00 AM - 5:00 PM',
+      imageUrl: 'https://i.postimg.cc/k4W5ZcdV/Screenshot-20260602-185627.jpg'
+    },
+    {
+      id: 'visit-2',
+      title: 'Emergency 24/7',
+      text: 'Available round the clock for urgent medical needs',
+      imageUrl: 'https://i.postimg.cc/rsQqXZZp/Screenshot-20260602-185637.jpg'
+    }
+  ],
   opd: [
     {
       id: 'opd-1',
@@ -67,8 +81,9 @@ export const INITIAL_SERVICES: Services = {
     {
       id: 'ipd-1',
       title: 'In-Patient Wards & ICU Care',
-      imageUrl: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80',
-      pdfUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+      imageUrl: 'https://i.postimg.cc/4dGGKRrb/Screenshot-20260602-185644.jpg',
+      pdfUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+      text: 'Fully equipped in-patient wards with modern facilities and ICU care services'
     },
     {
       id: 'ipd-2',
@@ -81,7 +96,7 @@ export const INITIAL_SERVICES: Services = {
     {
       id: 'em-1',
       title: 'Emergency Response Unit 24/7',
-      imageUrl: 'https://images.unsplash.com/photo-1583324113626-70df0f4cedf2?auto=format&fit=crop&w=800&q=80',
+      imageUrl: 'https://i.postimg.cc/fyb6Xz5W/Screenshot-20260602-185657.jpg',
       text: 'Dhading Hospital Urgent Care is open 24 hours a day, 365 days a year. Equipped with life support facilities and standby ambulances, our critical recovery room is managed by senior emergency physicians & trauma coordinators.'
     }
   ],
@@ -90,6 +105,7 @@ export const INITIAL_SERVICES: Services = {
       id: 'lab-1',
       title: 'Central Pathology Laboratory',
       pdfUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+      imageUrl: 'https://i.postimg.cc/L4ffKtVG/Screenshot-20260602-184935.jpg',
       text: 'Our central pathology operates 24/7. Fully automated clinical diagnostics, state of the art immunoassay systems, hematology analyzers, and highly structured microbiology setups to ensure exact reports.\n\nPathology Department Contact:\nEmail: pathology@dhadinghospital.com.np\nPhone: +977-10-520111\n\nChairman - Pathology Department:\nEmail: chairman@dhadinghospital.com.np\nPhone: +977-9851451956'
     }
   ],
@@ -97,8 +113,9 @@ export const INITIAL_SERVICES: Services = {
     {
       id: 'rad-1',
       title: 'Digital Computed Tomography & X-Ray',
-      imageUrl: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80',
-      pdfUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+      imageUrl: 'https://i.postimg.cc/rsQqXZZp/Screenshot-20260602-185637.jpg',
+      pdfUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+      text: 'Advanced radiology services with digital CT and X-Ray technology for precise diagnostics'
     }
   ],
   cashReception: [
