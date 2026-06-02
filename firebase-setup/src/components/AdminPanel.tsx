@@ -118,120 +118,31 @@ export default function AdminPanel({
   // General helpers for items
   const [selectedBooking, setSelectedBooking] = useState<BookingRequest | null>(null);
 
-  // Auto-save all data to Firebase RTDB when any state changes
+  // Single combined auto-save effect instead of 20 individual ones
   useEffect(() => {
-    if (categories.length > 0) {
-      saveDocument('categories', categories).catch(err => console.error('[v0] Error saving categories:', err));
-    }
-  }, [categories]);
-
-  useEffect(() => {
-    if (services) {
-      saveDocument('services', services).catch(err => console.error('[v0] Error saving services:', err));
-    }
-  }, [services]);
-
-  useEffect(() => {
-    if (doctors.length > 0) {
-      saveDocument('doctors', doctors).catch(err => console.error('[v0] Error saving doctors:', err));
-    }
-  }, [doctors]);
-
-  useEffect(() => {
-    if (girlsStaff.length > 0) {
-      saveDocument('girlsStaff', girlsStaff).catch(err => console.error('[v0] Error saving girlsStaff:', err));
-    }
-  }, [girlsStaff]);
-
-  useEffect(() => {
-    if (aboutUs) {
-      saveDocument('aboutUs', aboutUs).catch(err => console.error('[v0] Error saving aboutUs:', err));
-    }
-  }, [aboutUs]);
-
-  useEffect(() => {
-    if (patientData) {
-      saveDocument('patientData', patientData).catch(err => console.error('[v0] Error saving patientData:', err));
-    }
-  }, [patientData]);
-
-  useEffect(() => {
-    if (visitorData) {
-      saveDocument('visitorData', visitorData).catch(err => console.error('[v0] Error saving visitorData:', err));
-    }
-  }, [visitorData]);
-
-  useEffect(() => {
-    if (gallery.length > 0) {
-      saveDocument('gallery', gallery).catch(err => console.error('[v0] Error saving gallery:', err));
-    }
-  }, [gallery]);
-
-  useEffect(() => {
-    if (videos.length > 0) {
-      saveDocument('videos', videos).catch(err => console.error('[v0] Error saving videos:', err));
-    }
-  }, [videos]);
-
-  useEffect(() => {
-    if (news.length > 0) {
-      saveDocument('news', news).catch(err => console.error('[v0] Error saving news:', err));
-    }
-  }, [news]);
-
-  useEffect(() => {
-    if (priceList.length > 0) {
-      saveDocument('priceList', priceList).catch(err => console.error('[v0] Error saving priceList:', err));
-    }
-  }, [priceList]);
-
-  useEffect(() => {
-    if (contact) {
-      saveDocument('contact', contact).catch(err => console.error('[v0] Error saving contact:', err));
-    }
-  }, [contact]);
-
-  useEffect(() => {
-    if (settings) {
-      saveDocument('settings', settings).catch(err => console.error('[v0] Error saving settings:', err));
-    }
-  }, [settings]);
-
-  useEffect(() => {
-    if (bookings.length > 0) {
-      saveDocument('bookings', bookings).catch(err => console.error('[v0] Error saving bookings:', err));
-    }
-  }, [bookings]);
-
-  useEffect(() => {
-    if (testimonials.length > 0) {
-      saveDocument('testimonials', testimonials).catch(err => console.error('[v0] Error saving testimonials:', err));
-    }
-  }, [testimonials]);
-
-  useEffect(() => {
-    if (events.length > 0) {
-      saveDocument('events', events).catch(err => console.error('[v0] Error saving events:', err));
-    }
-  }, [events]);
-
-  useEffect(() => {
-    if (qrCodes.length > 0) {
-      saveDocument('qrCodes', qrCodes).catch(err => console.error('[v0] Error saving qrCodes:', err));
-    }
-  }, [qrCodes]);
-
-  useEffect(() => {
-    if (machines.length > 0) {
-      saveDocument('machines', machines).catch(err => console.error('[v0] Error saving machines:', err));
-    }
-  }, [machines]);
-
-  useEffect(() => {
-    if (mailSystem?.mailboxes) {
-      saveDocument('mailSystem', mailSystem).catch(err => console.error('[v0] Error saving mailSystem:', err));
-    }
-  }, [mailSystem]);
+    const timer = setTimeout(() => {
+      if (categories.length > 0) saveDocument('categories', categories).catch(() => {});
+      if (services) saveDocument('services', services).catch(() => {});
+      if (doctors.length > 0) saveDocument('doctors', doctors).catch(() => {});
+      if (girlsStaff.length > 0) saveDocument('girlsStaff', girlsStaff).catch(() => {});
+      if (aboutUs) saveDocument('aboutUs', aboutUs).catch(() => {});
+      if (patientData) saveDocument('patientData', patientData).catch(() => {});
+      if (visitorData) saveDocument('visitorData', visitorData).catch(() => {});
+      if (gallery.length > 0) saveDocument('gallery', gallery).catch(() => {});
+      if (videos.length > 0) saveDocument('videos', videos).catch(() => {});
+      if (news.length > 0) saveDocument('news', news).catch(() => {});
+      if (priceList.length > 0) saveDocument('priceList', priceList).catch(() => {});
+      if (contact) saveDocument('contact', contact).catch(() => {});
+      if (settings) saveDocument('settings', settings).catch(() => {});
+      if (bookings.length > 0) saveDocument('bookings', bookings).catch(() => {});
+      if (testimonials.length > 0) saveDocument('testimonials', testimonials).catch(() => {});
+      if (events.length > 0) saveDocument('events', events).catch(() => {});
+      if (qrCodes.length > 0) saveDocument('qrCodes', qrCodes).catch(() => {});
+      if (machines.length > 0) saveDocument('machines', machines).catch(() => {});
+      if (mailSystem?.mailboxes) saveDocument('mailSystem', mailSystem).catch(() => {});
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [categories, services, doctors, girlsStaff, aboutUs, patientData, visitorData, gallery, videos, news, priceList, contact, settings, bookings, testimonials, events, qrCodes, machines, mailSystem]);
 
   // About us helper lists
   const [bodName, setBodName] = useState('');
