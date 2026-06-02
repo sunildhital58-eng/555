@@ -89,7 +89,7 @@ export const INITIAL_SERVICES: Services = {
       id: 'lab-1',
       title: 'Central Pathology Laboratory',
       pdfUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-      text: 'Our central pathology operates 24/7. Fully automated clinical diagnostics, state of the art immunoassay systems, hematology analyzers, and highly structured microbiology setups to ensure exact reports.'
+      text: 'Our central pathology operates 24/7. Fully automated clinical diagnostics, state of the art immunoassay systems, hematology analyzers, and highly structured microbiology setups to ensure exact reports.\n\nPathology Department Contact:\nEmail: pathology@dhadinghospital.com.np\nPhone: +977-10-520111\n\nChairman - Pathology Department:\nEmail: chairman@dhadinghospital.com.np\nPhone: +977-9851451956'
     }
   ],
   radiology: [
