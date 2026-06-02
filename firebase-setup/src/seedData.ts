@@ -14,7 +14,9 @@ import {
   TestimonialItem,
   HospitalEventItem,
   QRCodeItem,
-  MachineItem
+  MachineItem,
+  MailBox,
+  HospitalMailSystem
 } from './types';
 
 export const INITIAL_CATEGORIES: string[] = [
@@ -308,51 +310,14 @@ export const INITIAL_FOR_VISITORS: ForVisitors = {
 };
 
 export const INITIAL_GALLERY: GalleryItem[] = [
-  {
-    id: "gal-1780319997394",
-    title: "Dhading Hospital Event",
-    imageUrl: "https://i.postimg.cc/tJytKZQf/Whats-App-Image-2026-05-31-at-11-44-16-PM-(2).jpg"
-  },
-  {
-    id: "gal-1780320010369",
-    title: "Dhading Hospital Event",
-    imageUrl: "https://i.postimg.cc/L5RBcYKw/Whats-App-Image-2026-05-31-at-11-44-16-PM-(1).jpg"
-  },
-  {
-    id: "gal-1780320029282",
-    title: "Dhading Hospital Event",
-    imageUrl: "https://i.postimg.cc/wMHcCy8n/Whats-App-Image-2026-05-31-at-11-44-16-PM.jpg"
-  },
-  {
-    id: "gal-1780320053713",
-    title: "Dhading Hospital Event",
-    imageUrl: "https://i.postimg.cc/hvgbkzWH/Whats-App-Image-2026-05-31-at-11-44-15-PM-(1).jpg"
-  },
-  {
-    id: "gal-1780320180489",
-    title: "Dhading Hospital Event",
-    imageUrl: "https://i.postimg.cc/Cx1Tydwx/Whats-App-Image-2026-05-31-at-10-52-50-PM.jpg"
-  },
-  {
-    id: "gal-1780320211010",
-    title: "Dhading Hospital Event",
-    imageUrl: "https://i.postimg.cc/sf9tv52t/Whats-App-Image-2026-05-31-at-10-52-48-PM.jpg"
-  },
-  {
-    id: "gal-1780320243177",
-    title: "Dhading Hospital Event",
-    imageUrl: "https://i.postimg.cc/WzXWS6FJ/Whats-App-Image-2026-05-31-at-10-52-46-PM.jpg"
-  },
-  {
-    id: "gal-1780320262760",
-    title: "Dhading Hospital Event",
-    imageUrl: "https://i.postimg.cc/nLB3Nt9x/Whats-App-Image-2026-05-31-at-10-52-45-PM.jpg"
-  },
-  {
-    id: "gal-1780320415177",
-    title: "Dhading Hospital Event",
-    imageUrl: "https://i.postimg.cc/zvjS8z8Q/Whats-App-Image-2026-05-31-at-11-44-14-PM-(1).jpg"
-  }
+  { id: "gal-1", title: "Dhading Hospital Event", imageUrl: "https://i.postimg.cc/dZhT9K7n/Whats-App-Image-2026-05-31-at-11-44-14-PM.jpg" },
+  { id: "gal-2", title: "Dhading Hospital Event", imageUrl: "https://i.postimg.cc/0KzJCq6G/Whats-App-Image-2026-05-31-at-11-44-14-PM-(1).jpg" },
+  { id: "gal-3", title: "Dhading Hospital Event", imageUrl: "https://i.postimg.cc/N9JHT00P/Whats-App-Image-2026-05-31-at-11-44-14-PM-(2).jpg" },
+  { id: "gal-4", title: "Dhading Hospital Event", imageUrl: "https://i.postimg.cc/G87yYppq/Whats-App-Image-2026-05-31-at-11-44-15-PM.jpg" },
+  { id: "gal-5", title: "Dhading Hospital Event", imageUrl: "https://i.postimg.cc/S2TM8KKr/Whats-App-Image-2026-05-31-at-11-44-15-PM-(1).jpg" },
+  { id: "gal-6", title: "Dhading Hospital Event", imageUrl: "https://i.postimg.cc/BLYKDvvC/Whats-App-Image-2026-05-31-at-11-44-16-PM.jpg" },
+  { id: "gal-7", title: "Dhading Hospital Event", imageUrl: "https://i.postimg.cc/8JK6WCCm/Whats-App-Image-2026-05-31-at-11-44-16-PM-(1).jpg" },
+  { id: "gal-8", title: "Dhading Hospital Event", imageUrl: "https://i.postimg.cc/0MWwmNNd/Whats-App-Image-2026-05-31-at-11-44-16-PM-(2).jpg" }
 ];
 
 export const INITIAL_VIDEOS: VideoItem[] = [
@@ -487,31 +452,99 @@ export const INITIAL_EVENTS: HospitalEventItem[] = [
 ];
 
 export const INITIAL_MACHINES: MachineItem[] = [
-  {
-    id: 'mach-1',
-    title: 'High-Resolution 4D Ultrasound (USG) Machine',
-    imageUrl: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80',
-    description: 'Our high-resolution 4D Ultrasound is equipped with advanced Doppler imaging technology. It provides real-time anatomical detail for obstetrics, gynecology, cardiology, and abdominal diagnostic studies.'
-  },
-  {
-    id: 'mach-2',
-    title: 'Fully Automated Hematology Analyzer',
-    imageUrl: 'https://images.unsplash.com/photo-1579154204601-01588f351167?auto=format&fit=crop&w=800&q=80',
-    description: 'This is our next-generation laboratory analyzer. It offers 5-part white blood cell differential counts, giving accurate CBC reports within minutes, reducing patient wait-times significantly.'
-  },
-  {
-    id: 'mach-3',
-    title: 'Digital Computed Radiography (X-Ray) System',
-    imageUrl: 'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&w=800&q=80',
-    description: 'A low-radiation digital radiography system offering crystal clear diagnostic skeletal imaging. Immediate image acquisition allows our surgeons and emergency team to assess traumas swiftly.'
-  }
+  { id: "mach-1", title: "Machine 1", imageUrl: "https://i.postimg.cc/G8McdsHW/Whats-App-Image-2026-05-31-at-10-52-55-PM.jpg", description: "Hospital medical equipment" },
+  { id: "mach-2", title: "Machine 2", imageUrl: "https://i.postimg.cc/HcSpd7VP/Whats-App-Image-2026-05-31-at-10-52-55-PM-(1).jpg", description: "Hospital medical equipment" },
+  { id: "mach-3", title: "Machine 3", imageUrl: "https://i.postimg.cc/474JD1NV/Whats-App-Image-2026-05-31-at-10-52-56-PM.jpg", description: "Hospital medical equipment" },
+  { id: "mach-4", title: "Machine 4", imageUrl: "https://i.postimg.cc/7GPxFNYs/Whats-App-Image-2026-05-31-at-10-52-56-PM-(1).jpg", description: "Hospital medical equipment" },
+  { id: "mach-5", title: "Machine 5", imageUrl: "https://i.postimg.cc/JDT1MBsm/Whats-App-Image-2026-05-31-at-10-52-56-PM-(2).jpg", description: "Hospital medical equipment" },
+  { id: "mach-6", title: "Machine 6", imageUrl: "https://i.postimg.cc/478JshYR/Whats-App-Image-2026-05-31-at-10-52-57-PM.jpg", description: "Hospital medical equipment" },
+  { id: "mach-7", title: "Machine 7", imageUrl: "https://i.postimg.cc/ZvCJRKNt/Whats-App-Image-2026-05-31-at-10-52-57-PM-(1).jpg", description: "Hospital medical equipment" },
+  { id: "mach-8", title: "Machine 8", imageUrl: "https://i.postimg.cc/sQnVsZMR/Whats-App-Image-2026-05-31-at-10-52-57-PM-(2).jpg", description: "Hospital medical equipment" },
+  { id: "mach-9", title: "Machine 9", imageUrl: "https://i.postimg.cc/64yB35Zp/Whats-App-Image-2026-05-31-at-10-52-58-PM.jpg", description: "Hospital medical equipment" },
+  { id: "mach-10", title: "Machine 10", imageUrl: "https://i.postimg.cc/PvPdxrDt/Whats-App-Image-2026-05-31-at-10-52-58-PM-(1).jpg", description: "Hospital medical equipment" },
+  { id: "mach-11", title: "Machine 11", imageUrl: "https://i.postimg.cc/vxcGBHn8/Whats-App-Image-2026-05-31-at-10-52-58-PM-(2).jpg", description: "Hospital medical equipment" },
+  { id: "mach-12", title: "Machine 12", imageUrl: "https://i.postimg.cc/m1tTD29r/Whats-App-Image-2026-05-31-at-10-52-59-PM.jpg", description: "Hospital medical equipment" },
+  { id: "mach-13", title: "Machine 13", imageUrl: "https://i.postimg.cc/MfvzTKBj/Whats-App-Image-2026-05-31-at-10-52-59-PM-(1).jpg", description: "Hospital medical equipment" },
+  { id: "mach-14", title: "Machine 14", imageUrl: "https://i.postimg.cc/SjsSVVPq/Whats-App-Image-2026-05-31-at-10-52-59-PM-(2).jpg", description: "Hospital medical equipment" },
+  { id: "mach-15", title: "Machine 15", imageUrl: "https://i.postimg.cc/8s5pwwYN/Whats-App-Image-2026-05-31-at-10-53-00-PM.jpg", description: "Hospital medical equipment" },
+  { id: "mach-16", title: "Machine 16", imageUrl: "https://i.postimg.cc/DmZv55N7/Whats-App-Image-2026-05-31-at-10-53-00-PM-(1).jpg", description: "Hospital medical equipment" },
+  { id: "mach-17", title: "Machine 17", imageUrl: "https://i.postimg.cc/xqCfggZf/Whats-App-Image-2026-05-31-at-10-53-00-PM-(2).jpg", description: "Hospital medical equipment" },
+  { id: "mach-18", title: "Machine 18", imageUrl: "https://i.postimg.cc/BtVqzHWH/Whats-App-Image-2026-05-31-at-10-53-01-PM.jpg", description: "Hospital medical equipment" },
+  { id: "mach-19", title: "Machine 19", imageUrl: "https://i.postimg.cc/qg5kFyfn/Whats-App-Image-2026-05-31-at-10-53-01-PM-(1).jpg", description: "Hospital medical equipment" },
+  { id: "mach-20", title: "Machine 20", imageUrl: "https://i.postimg.cc/8s01YM8d/Whats-App-Image-2026-05-31-at-10-53-01-PM-(2).jpg", description: "Hospital medical equipment" },
+  { id: "mach-21", title: "Machine 21", imageUrl: "https://i.postimg.cc/t7MXcW0t/Whats-App-Image-2026-05-31-at-10-53-02-PM.jpg", description: "Hospital medical equipment" },
+  { id: "mach-22", title: "Machine 22", imageUrl: "https://i.postimg.cc/PPvtnJh1/Whats-App-Image-2026-05-31-at-10-53-02-PM-(1).jpg", description: "Hospital medical equipment" },
+  { id: "mach-23", title: "Machine 23", imageUrl: "https://i.postimg.cc/Whq2czjG/Whats-App-Image-2026-05-31-at-10-53-03-PM.jpg", description: "Hospital medical equipment" },
+  { id: "mach-24", title: "Machine 24", imageUrl: "https://i.postimg.cc/D84230FQ/Whats-App-Image-2026-05-31-at-10-53-03-PM-(1).jpg", description: "Hospital medical equipment" },
+  { id: "mach-25", title: "Machine 25", imageUrl: "https://i.postimg.cc/jLnsY2Kh/Whats-App-Image-2026-05-31-at-10-53-03-PM-(2).jpg", description: "Hospital medical equipment" },
+  { id: "mach-26", title: "Machine 26", imageUrl: "https://i.postimg.cc/XpBV6q3L/Whats-App-Image-2026-05-31-at-10-53-04-PM.jpg", description: "Hospital medical equipment" }
 ];
 
 export const INITIAL_QR_CODES: QRCodeItem[] = [
   {
-    id: 'qr-default-1',
-    title: 'Dhading Hospital official QR (Nabil Bank Ltd Fonepay)',
-    imageUrl: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=400&q=80'
+    id: 'qr-1',
+    title: 'Dhading Hospital QR Code',
+    imageUrl: 'https://i.postimg.cc/GtJ0YYh2/DHADING-HOSPITAL-PVT-LTD-default-terminal-Qr-4-39-5-98-1.png'
   }
 ];
 
+export const INITIAL_MAIL_SYSTEM: HospitalMailSystem = {
+  mailboxes: [
+    {
+      id: 'mb-1',
+      name: 'Hospital Mailbox',
+      email: 'info@dhadinghospital.com.np',
+      password: 'Dhading@123',
+      messages: [],
+      createdAt: Date.now()
+    },
+    {
+      id: 'mb-2',
+      name: 'Chairman Mailbox',
+      email: 'chairman@dhadinghospital.com.np',
+      password: 'H3llo2u1',
+      messages: [],
+      createdAt: Date.now()
+    },
+    {
+      id: 'mb-3',
+      name: 'Reception Mailbox',
+      email: 'reception@dhadinghospital.com.np',
+      password: 'Dhading@123',
+      messages: [],
+      createdAt: Date.now()
+    },
+    {
+      id: 'mb-4',
+      name: 'Account Mailbox',
+      email: 'account@dhadinghospital.com.np',
+      password: 'Dhading@123',
+      messages: [],
+      createdAt: Date.now()
+    },
+    {
+      id: 'mb-5',
+      name: 'Pathology Mailbox',
+      email: 'pathology@dhadinghospital.com.np',
+      password: 'Dhading@123',
+      messages: [],
+      createdAt: Date.now()
+    },
+    {
+      id: 'mb-6',
+      name: 'Medical Director Mailbox',
+      email: 'medicaldirector@dhadinghospital.com.np',
+      password: 'Dhading@123',
+      messages: [],
+      createdAt: Date.now()
+    }
+  ],
+  defaultMailboxes: {
+    hospital: 'info@dhadinghospital.com.np',
+    chairman: 'chairman@dhadinghospital.com.np',
+    reception: 'reception@dhadinghospital.com.np',
+    account: 'account@dhadinghospital.com.np',
+    pathology: 'pathology@dhadinghospital.com.np',
+    medicalDirector: 'medicaldirector@dhadinghospital.com.np'
+  }
+};

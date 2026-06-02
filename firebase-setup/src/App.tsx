@@ -4,13 +4,13 @@ import {
   ChevronRight, ChevronDown, Users, Eye, Image, Play, Key, Calendar, ArrowRight, ShieldAlert,
   Download, Sparkles, MessageCircle, Heart, ThumbsUp, Trash2, ArrowUpRight, Lock, Facebook, Twitter, Linkedin, X, Search, CheckCircle2
 } from 'lucide-react';
-import { Services, Doctor, AboutUs, ForPatient, ForVisitors, GalleryItem, VideoItem, NewsItem, PriceListItem, ContactUsInfo, WebSettings, BookingRequest, TestimonialItem, HospitalEventItem, QRCodeItem, MachineItem } from './types';
+import { Services, Doctor, AboutUs, ForPatient, ForVisitors, GalleryItem, VideoItem, NewsItem, PriceListItem, ContactUsInfo, WebSettings, BookingRequest, TestimonialItem, HospitalEventItem, QRCodeItem, MachineItem, MailBox, HospitalMailSystem } from './types';
 import { DETAILED_PRICE_LIST } from './priceListData';
 import { 
   INITIAL_CATEGORIES, INITIAL_SERVICES, INITIAL_DOCTORS, INITIAL_ABOUT_US, 
   INITIAL_FOR_PATIENT, INITIAL_FOR_VISITORS, INITIAL_GALLERY, INITIAL_VIDEOS, 
   INITIAL_NEWS, INITIAL_PRICE_LIST, INITIAL_CONTACT, INITIAL_SETTINGS, INITIAL_BOOKINGS,
-  INITIAL_TESTIMONIALS, INITIAL_EVENTS, INITIAL_MACHINES, INITIAL_QR_CODES
+  INITIAL_TESTIMONIALS, INITIAL_EVENTS, INITIAL_MACHINES, INITIAL_QR_CODES, INITIAL_MAIL_SYSTEM
 } from './seedData';
 import { getWhatsAppLink, parseVideoEmbed, getYouTubeThumbnail } from './utils';
 import { listenToDocument, saveDocument } from './firebase';
@@ -135,6 +135,8 @@ export default function App() {
     return saved ? JSON.parse(saved) : INITIAL_MACHINES;
   });
 
+  const [mailSystem, setMailSystem] = useState<HospitalMailSystem>(INITIAL_MAIL_SYSTEM);
+
   const [selectedMachineDashboard, setSelectedMachineDashboard] = useState<MachineItem | null>(null);
 
   // Prefill state for the online booking popup modal
@@ -189,6 +191,7 @@ export default function App() {
     unsubscribers.push(listenToDocument('events', setEvents));
     unsubscribers.push(listenToDocument('qrCodes', setQrCodes));
     unsubscribers.push(listenToDocument('machines', setMachines));
+    unsubscribers.push(listenToDocument('mailSystem', setMailSystem));
 
     // Cleanup listeners on unmount
     return () => {
