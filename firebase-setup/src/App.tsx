@@ -39,107 +39,46 @@ export default function App() {
   const [showBookModal, setShowBookModal] = useState(false);
   const [activeTab, setActiveTab] = useState('home');
 
-  // Load state from local storage or fallback to seed data
-  const [categories, setCategories] = useState<string[]>(() => {
-    const saved = localStorage.getItem('dh_categories');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (parsed.length >= 38) {
-        return parsed;
-      }
-    }
-    return INITIAL_CATEGORIES;
-  });
+  // Load state from Firebase Realtime Database only
+  const [categories, setCategories] = useState<string[]>(INITIAL_CATEGORIES);
 
-  const [services, setServices] = useState<Services>(() => {
-    const saved = localStorage.getItem('dh_services');
-    return saved ? { ...INITIAL_SERVICES, ...JSON.parse(saved) } : INITIAL_SERVICES;
-  });
+  const [services, setServices] = useState<Services>(INITIAL_SERVICES);
 
-  const [doctors, setDoctors] = useState<Doctor[]>(() => {
-    const saved = localStorage.getItem('dh_doctors');
-    return saved ? JSON.parse(saved) : INITIAL_DOCTORS;
-  });
+  const [doctors, setDoctors] = useState<Doctor[]>(INITIAL_DOCTORS);
 
-  const [girlsStaff, setGirlsStaff] = useState<StaffMember[]>(() => {
-    const saved = localStorage.getItem('dh_girls_staff');
-    return saved ? JSON.parse(saved) : INITIAL_GIRLS_STAFF;
-  });
+  const [girlsStaff, setGirlsStaff] = useState<StaffMember[]>(INITIAL_GIRLS_STAFF);
 
-  const [aboutUs, setAboutUs] = useState<AboutUs>(() => {
-    const saved = localStorage.getItem('dh_about_us');
-    return saved ? { ...INITIAL_ABOUT_US, ...JSON.parse(saved) } : INITIAL_ABOUT_US;
-  });
+  const [aboutUs, setAboutUs] = useState<AboutUs>(INITIAL_ABOUT_US);
 
-  const [patientData, setPatientData] = useState<ForPatient>(() => {
-    const saved = localStorage.getItem('dh_patient');
-    return saved ? { ...INITIAL_FOR_PATIENT, ...JSON.parse(saved) } : INITIAL_FOR_PATIENT;
-  });
+  const [patientData, setPatientData] = useState<ForPatient>(INITIAL_FOR_PATIENT);
 
-  const [visitorData, setVisitorData] = useState<ForVisitors>(() => {
-    const saved = localStorage.getItem('dh_visitors');
-    return saved ? { ...INITIAL_FOR_VISITORS, ...JSON.parse(saved) } : INITIAL_FOR_VISITORS;
-  });
+  const [visitorData, setVisitorData] = useState<ForVisitors>(INITIAL_FOR_VISITORS);
 
-  const [gallery, setGallery] = useState<GalleryItem[]>(() => {
-    const saved = localStorage.getItem('dh_gallery');
-    return saved ? JSON.parse(saved) : INITIAL_GALLERY;
-  });
+  const [gallery, setGallery] = useState<GalleryItem[]>(INITIAL_GALLERY);
 
-  const [videos, setVideos] = useState<VideoItem[]>(() => {
-    const saved = localStorage.getItem('dh_videos');
-    return saved ? JSON.parse(saved) : INITIAL_VIDEOS;
-  });
+  const [videos, setVideos] = useState<VideoItem[]>(INITIAL_VIDEOS);
 
-  const [news, setNews] = useState<NewsItem[]>(() => {
-    const saved = localStorage.getItem('dh_news');
-    return saved ? JSON.parse(saved) : INITIAL_NEWS;
-  });
+  const [news, setNews] = useState<NewsItem[]>(INITIAL_NEWS);
 
-  const [priceList, setPriceList] = useState<PriceListItem[]>(() => {
-    const saved = localStorage.getItem('dh_price_list');
-    return saved ? JSON.parse(saved) : INITIAL_PRICE_LIST;
-  });
+  const [priceList, setPriceList] = useState<PriceListItem[]>(INITIAL_PRICE_LIST);
 
-  const [contact, setContact] = useState<ContactUsInfo>(() => {
-    const saved = localStorage.getItem('dh_contact');
-    return saved ? { ...INITIAL_CONTACT, ...JSON.parse(saved) } : INITIAL_CONTACT;
-  });
+  const [contact, setContact] = useState<ContactUsInfo>(INITIAL_CONTACT);
 
-  const [settings, setSettings] = useState<WebSettings>(() => {
-    const saved = localStorage.getItem('dh_settings');
-    return saved ? { ...INITIAL_SETTINGS, ...JSON.parse(saved) } : INITIAL_SETTINGS;
-  });
+  const [settings, setSettings] = useState<WebSettings>(INITIAL_SETTINGS);
 
-  const [bookings, setBookings] = useState<BookingRequest[]>(() => {
-    const saved = localStorage.getItem('dh_bookings');
-    return saved ? JSON.parse(saved) : INITIAL_BOOKINGS;
-  });
+  const [bookings, setBookings] = useState<BookingRequest[]>(INITIAL_BOOKINGS);
 
-  const [testimonials, setTestimonials] = useState<TestimonialItem[]>(() => {
-    const saved = localStorage.getItem('dh_testimonials');
-    return saved ? JSON.parse(saved) : INITIAL_TESTIMONIALS;
-  });
+  const [testimonials, setTestimonials] = useState<TestimonialItem[]>(INITIAL_TESTIMONIALS);
 
-  const [events, setEvents] = useState<HospitalEventItem[]>(() => {
-    const saved = localStorage.getItem('dh_events');
-    return saved ? JSON.parse(saved) : INITIAL_EVENTS;
-  });
+  const [events, setEvents] = useState<HospitalEventItem[]>(INITIAL_EVENTS);
 
   const [passwordConfig, setPasswordConfig] = useState(() => {
-    const saved = localStorage.getItem('dh_pass_config');
-    return saved ? JSON.parse(saved) : { password: '123321', recoveryPassword: 'dhadingrecovery' };
+    return { password: '123321', recoveryPassword: 'dhadingrecovery' };
   });
 
-  const [qrCodes, setQrCodes] = useState<QRCodeItem[]>(() => {
-    const saved = localStorage.getItem('dh_qr_codes');
-    return saved ? JSON.parse(saved) : INITIAL_QR_CODES;
-  });
+  const [qrCodes, setQrCodes] = useState<QRCodeItem[]>(INITIAL_QR_CODES);
 
-  const [machines, setMachines] = useState<MachineItem[]>(() => {
-    const saved = localStorage.getItem('dh_machines');
-    return saved ? JSON.parse(saved) : INITIAL_MACHINES;
-  });
+  const [machines, setMachines] = useState<MachineItem[]>(INITIAL_MACHINES);
 
   const [mailSystem, setMailSystem] = useState<HospitalMailSystem>(INITIAL_MAIL_SYSTEM);
 
