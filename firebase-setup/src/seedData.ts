@@ -406,6 +406,12 @@ export const INITIAL_SETTINGS: WebSettings = {
       title: "Services",
       subtitle: "",
       imageUrl: "https://i.postimg.cc/R02TRCSm/Whats-App-Image-2026-05-31-at-10-52-43-PM.jpg"
+    },
+    {
+      id: "b-1780321220001",
+      title: "Operation",
+      subtitle: "",
+      imageUrl: "https://i.postimg.cc/McnNCtnM/Whats-App-Image-2026-05-31-at-10-52-48-PM.jpg"
     }
   ],
   welcomeTitle: "Welcome to Dhading Hospital Pvt. Ltd.",
