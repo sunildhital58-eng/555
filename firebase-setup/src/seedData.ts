@@ -216,7 +216,8 @@ export const INITIAL_ABOUT_US: AboutUs = {
     name: 'Bikash Sapkota',
     details: 'Welcome to Dhading Hospital. Our ultimate aspiration is to nurture standard health infrastructure for residents and rural neighborhoods. By delivering economical solutions, cutting-edge therapies, and empathetic service, we hope to enrich lives for years to come. Available 24x7 hrs at mobile/whatsapp no: 9851451956.',
     whatsappNumber: '9851451956',
-    photoUrl: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80'
+    photoUrl: 'https://i.postimg.cc/zv9KFyDX/Whats-App-Image-2026-05-31-at-11-51-02-PM.jpg',
+    email: 'chairman@dhadinghospital.com.np'
   },
   hospitalWorkingTeam: [
     {
