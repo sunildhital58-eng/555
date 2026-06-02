@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Building, Stethoscope, Users, Info, FileText, Eye, Image, Play, 
   Settings, Key, Trash2, Edit, Plus, Check, ShieldAlert, LogOut, Phone, Mail, Calendar, EyeOff, X, Clock, MessageCircle, QrCode, ClipboardList, Send, Inbox, Reply
@@ -117,6 +117,16 @@ export default function AdminPanel({
 
   // General helpers for items
   const [selectedBooking, setSelectedBooking] = useState<BookingRequest | null>(null);
+
+  // Auto-save mailSystem to Firebase RTDB when it changes
+  useEffect(() => {
+    if (mailSystem?.mailboxes) {
+      console.log('[v0] mailSystem changed, saving to RTDB:', mailSystem);
+      saveDocument('mailSystem', mailSystem).catch(err => {
+        console.error('[v0] Error saving mailSystem:', err);
+      });
+    }
+  }, [mailSystem]);
 
   // About us helper lists
   const [bodName, setBodName] = useState('');
