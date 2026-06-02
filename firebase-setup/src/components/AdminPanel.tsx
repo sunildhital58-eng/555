@@ -489,12 +489,12 @@ export default function AdminPanel({
             </button>
 
             <button
-              onClick={() => setActiveSubTab('girlsStaff')}
+              onClick={() => setActiveSubTab('mailboxManager')}
               className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors cursor-pointer ${
-                activeSubTab === 'girlsStaff' ? 'bg-[#00A64C] text-white' : 'hover:bg-gray-800'
+                activeSubTab === 'mailboxManager' ? 'bg-[#00A64C] text-white' : 'hover:bg-gray-800'
               }`}
             >
-              <Users className="size-4" /> Girls/Women Staff
+              <Mail className="size-4" /> Mailbox Manager
             </button>
 
             <button
@@ -968,7 +968,7 @@ export default function AdminPanel({
                           2. Write each diagnostic test or checkup feature on its own **new line** below that.
                         </p>
                         <p className="italic font-bold text-[#00A64C]">
-                          नेपाली: पहिलो हरफमा `Price: Rs. ५,०००/-` लेख्नुहोस् र तल प्रत्येक लाइनमा फरक-फरक जाचँको नाम लेख्नुहोस्। ती जाचँहरु स्वतः Checkbox लिस्टमा देखिनेछन्।
+                          नेपाली: पहिलो हरफमा `Price: Rs. ५,०००/-` लेख्नुहोस् र तल प्रत्येक लाइनमा फरक-फरक जाचँको नाम लेख्नुहोस्। ती जाचँहरु स्वतः Checkbox लिस्टमा देखिनेछन्���
                         </p>
                       </div>
                     )}
@@ -1305,115 +1305,98 @@ export default function AdminPanel({
         )}
 
         {/* Tab 3: Girls/Women Staff */}
-        {activeSubTab === 'girlsStaff' && (
+        {activeSubTab === 'mailboxManager' && (
           <div className="space-y-6">
             <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs">
               <h3 className="text-[#006830] text-lg font-bold mb-2 flex items-center gap-2">
-                <Users className="size-5 text-[#00A64C]" />
-                Girls/Women Staff Management
+                <Mail className="size-5 text-[#00A64C]" />
+                Mailbox Manager
               </h3>
-              <p className="text-xs text-gray-500 pb-4">Add, edit, and manage hospital girls and women staff profiles including doctors, nurses, and support staff.</p>
+              <p className="text-xs text-gray-500 pb-4">Add, edit, and manage department mailboxes. These will appear on the website for patients to contact different departments.</p>
 
-              {/* Add Staff Form */}
+              {/* Add Mailbox Form */}
               <form className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-4 mb-6">
-                <h4 className="text-xs uppercase font-extrabold text-gray-700 tracking-wider">➕ Add New Staff Member</h4>
+                <h4 className="text-xs uppercase font-extrabold text-gray-700 tracking-wider">➕ Add New Mailbox</h4>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <input
                     type="text"
-                    placeholder="Full Name"
-                    id="girl_staff_name"
+                    placeholder="Mailbox Name (e.g., Hospital Info, Chairman)"
+                    id="mailbox_name_admin"
                     className="w-full px-3 py-2 text-xs border border-gray-200 rounded bg-white focus:outline-none"
                   />
                   <input
-                    type="text"
-                    placeholder="Position/Title"
-                    id="girl_staff_position"
+                    type="email"
+                    placeholder="Email Address (e.g., info@hospital.com)"
+                    id="mailbox_email_admin"
                     className="w-full px-3 py-2 text-xs border border-gray-200 rounded bg-white focus:outline-none"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Department"
-                    id="girl_staff_department"
-                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded bg-white focus:outline-none"
-                  />
-                  <input
-                    type="url"
-                    placeholder="Photo URL"
-                    id="girl_staff_photo"
-                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded bg-white focus:outline-none"
-                  />
-                  <input
-                    type="tel"
-                    placeholder="Phone Number"
-                    id="girl_staff_phone"
-                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded bg-white focus:outline-none"
-                  />
-                  <textarea
-                    placeholder="Bio/Description"
-                    id="girl_staff_bio"
-                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded bg-white focus:outline-none col-span-1 sm:col-span-2 md:col-span-3"
                   />
                 </div>
 
                 <button
                   type="button"
                   onClick={() => {
-                    const name = (document.getElementById('girl_staff_name') as HTMLInputElement).value;
-                    const position = (document.getElementById('girl_staff_position') as HTMLInputElement).value;
-                    const department = (document.getElementById('girl_staff_department') as HTMLInputElement).value;
-                    const photoUrl = (document.getElementById('girl_staff_photo') as HTMLInputElement).value;
-                    const phone = (document.getElementById('girl_staff_phone') as HTMLInputElement).value;
-                    const bio = (document.getElementById('girl_staff_bio') as HTMLTextAreaElement).value;
+                    const name = (document.getElementById('mailbox_name_admin') as HTMLInputElement).value;
+                    const email = (document.getElementById('mailbox_email_admin') as HTMLInputElement).value;
 
-                    if (name && position && photoUrl) {
-                      const newStaff: StaffMember = {
+                    if (name && email) {
+                      const newMailbox = {
                         id: Date.now().toString(),
                         name,
-                        position,
-                        department,
-                        photoUrl,
-                        phone,
-                        bio,
-                        createdAt: Date.now()
+                        email,
+                        password: Math.random().toString(36).substring(2, 10),
+                        messages: []
                       };
 
-                      setGirlsStaff(prev => [...prev, newStaff]);
-                      (document.getElementById('girl_staff_name') as HTMLInputElement).value = '';
-                      (document.getElementById('girl_staff_position') as HTMLInputElement).value = '';
-                      (document.getElementById('girl_staff_department') as HTMLInputElement).value = '';
-                      (document.getElementById('girl_staff_photo') as HTMLInputElement).value = '';
-                      (document.getElementById('girl_staff_phone') as HTMLInputElement).value = '';
-                      (document.getElementById('girl_staff_bio') as HTMLTextAreaElement).value = '';
-                      setSaveStatus({ text: 'Staff added! Click Save to persist changes.', isError: false });
+                      setMailSystem(prev => ({
+                        ...prev,
+                        mailboxes: [...(prev.mailboxes || []), newMailbox]
+                      }));
+
+                      (document.getElementById('mailbox_name_admin') as HTMLInputElement).value = '';
+                      (document.getElementById('mailbox_email_admin') as HTMLInputElement).value = '';
+                      setSaveStatus({ text: 'Mailbox added! Click Save to persist changes.', isError: false });
+                    } else {
+                      setSaveStatus({ text: 'Please fill all fields', isError: true });
                     }
                   }}
                   className="w-full bg-[#00A64C] hover:bg-[#006830] text-white px-4 py-2 rounded text-xs font-bold transition-colors cursor-pointer"
                 >
-                  Add Staff Member
+                  Add Mailbox
                 </button>
               </form>
 
-              {/* Staff Grid */}
+              {/* Mailbox Grid - Same style as website */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {girlsStaff.map(staff => (
-                  <div key={staff.id} className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-300 rounded-lg p-4">
-                    {staff.photoUrl && (
-                      <img src={staff.photoUrl} alt={staff.name} className="w-full h-40 object-cover rounded-lg mb-3" />
-                    )}
-                    <h4 className="font-bold text-gray-900 text-sm">{staff.name}</h4>
-                    <p className="text-xs text-gray-700">{staff.position}</p>
-                    {staff.department && <p className="text-xs text-gray-600">{staff.department}</p>}
-                    {staff.bio && <p className="text-xs text-gray-600 mt-2">{staff.bio}</p>}
-                    {staff.phone && <p className="text-xs text-gray-600 mt-1">{staff.phone}</p>}
-                    <button
-                      onClick={() => setGirlsStaff(prev => prev.filter(s => s.id !== staff.id))}
-                      className="mt-3 w-full bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded text-xs font-bold transition-colors cursor-pointer"
-                    >
-                      Delete
-                    </button>
+                {mailSystem?.mailboxes && mailSystem.mailboxes.length > 0 ? (
+                  mailSystem.mailboxes.map(box => (
+                    <div key={box.id} className="bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 rounded-lg p-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Mail className="size-5 text-green-600" />
+                        <h4 className="font-bold text-gray-900 text-sm">{box.name}</h4>
+                      </div>
+                      <p className="text-xs text-gray-700 mb-3 break-all">{box.email}</p>
+                      <p className="text-xs text-gray-600 mb-3">Password: <span className="font-mono">••••••••</span></p>
+                      <button
+                        onClick={() => {
+                          setMailSystem(prev => ({
+                            ...prev,
+                            mailboxes: (prev.mailboxes || []).filter(m => m.id !== box.id)
+                          }));
+                          setSaveStatus({ text: 'Mailbox deleted! Click Save to persist changes.', isError: false });
+                        }}
+                        className="w-full bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded text-xs font-bold transition-colors cursor-pointer"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-8 text-gray-500">
+                    <Mail className="size-12 mx-auto mb-2 opacity-30" />
+                    <p className="text-sm">No mailboxes yet. Add one above!</p>
                   </div>
-                ))}
+                )}
               </div>
             </div>
           </div>
