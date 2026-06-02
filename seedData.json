@@ -1,0 +1,439 @@
+{
+  "categories": [
+    "ORTHOPEDICS, TRAUMA & SPINE SURGERY",
+    "GENERAL SURGERY",
+    "NEURO SURGERY",
+    "DENTAL SURGERY",
+    "ORTHO DENTIST",
+    "ENT HEAD & NECK SURGERY",
+    "BURN, PLASTIC & COSMETIC SURGERY",
+    "THORACIC, BREAST AND THYROID SURGERY",
+    "CARDIO –VASCULAR SURGERY",
+    "PEDIATRIC SURGERY",
+    "OBSTETRICS & GYNECOLOGY",
+    "INTERNAL MEDICINE",
+    "GASTROENTEROLOGY & HEPATOBILIARY",
+    "NEPHROLOGY",
+    "MEDICAL ONCOLOGY",
+    "PEDIATRICS AND ADOLESCENT MEDICINE",
+    "PSYCHIATRY",
+    "DERMATOLOGY & COSMETOLOGY",
+    "RADIOLOGY",
+    "PATHOLOGY",
+    "ANESTHESIA & CRITICAL CARE",
+    "PHYSIOTHERAPY",
+    "PLASTIC SURGERY",
+    "NEUROLOGY",
+    "CARDIOLOGY",
+    "DERMATOLOGY",
+    "ENDOCRINOLOGY & METABOLISM",
+    "OPHTHALMOLOGY",
+    "IVF",
+    "PAIN CLINIC",
+    "GENERAL SURGERY & UROLOGY",
+    "NEURO MEDICINE",
+    "HEMATOLOGY",
+    "CTVS",
+    "PULMONOLOGY MEDICINE",
+    "ORAL & MAXILLOFACIAL SURGERY",
+    "DENTAL HYGIENIST & TECHNICIAN",
+    "UROLOGY & ROBOTIC ONCOLOGY"
+  ],
+  "services": {
+    "opd": [],
+    "ipd": [
+      {
+        "id": "ipd-1780233233373",
+        "title": "list ",
+        "imageUrl": "",
+        "pdfUrl": "",
+        "text": "1* General Ward\n    2* Maternity Ward\n    3* Post Operative Ward\n   4* ICU\n   5* NICU\n   6* Dialysis\n    7* Cabins\n       * Semi Cabin\n       * Double Cabin\n       * Single Cabin\n       * VIP Cabins\n       * Deluxe Cabin\n\n"
+      }
+    ],
+    "emergency": [
+      {
+        "id": "emergency-1780237553143",
+        "title": "EMERGENCY",
+        "imageUrl": "https://i.postimg.cc/Sss9zXzT/Whats-App-Image-2026-05-31-at-8-07-51-AM.jpg",
+        "pdfUrl": "",
+        "text": "The Emergency Room is located just infront of hospital building.Our hospital provide round a clock service in emergency department.All of our doctors are highly experience.Doctors work closely with a highly talanted and experienced team of physician to provide the very best care."
+      }
+    ],
+    "labPathology": [
+      {
+        "id": "lab-1",
+        "title": "Central Pathology Laboratory",
+        "pdfUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+        "text": "Our central pathology operates 24/7. Fully automated clinical diagnostics, state of the art immunoassay systems, hematology analyzers, and highly structured microbiology setups to ensure exact reports."
+      },
+      {
+        "id": "labPathology-1780233385687",
+        "title": "pathology",
+        "imageUrl": "https://i.postimg.cc/BnnPzLmQ/Whats-App-Image-2026-05-31-at-8-07-51-AM(2).jpg",
+        "pdfUrl": "",
+        "text": "Pathology of our hospital runs 24hrs & 7days. Highly experienced and efficient staffs do their best job and ensure that our patients receive quick and accurate results within a given time.\n\n \nLab test which we provide\n\n \n\n   - BIOCHEMISTRY\n   - CYTOLOGY\n   - FLUID ANALYSIS\n   - HEAMATOLOGY\n  -  HISTOPATHOLOGY\n  -  IMMUNOLOGY\n  -  MICROBIOLOGY\n  -  PARASITOLOGY\n\n"
+      }
+    ],
+    "radiology": [
+      {
+        "id": "rad-1",
+        "title": "Digital Computed Tomography & X-Ray",
+        "imageUrl": "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80",
+        "pdfUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+      },
+      {
+        "id": "radiology-1780233422967",
+        "title": "radiology",
+        "imageUrl": "",
+        "pdfUrl": "",
+        "text": "Radiology department of Greencity Hospital is equiped with latest technology equipment fully computerized .Experienced professionals offers valuable services with the help of those high-tech equipment.Available services on this hospital are USG,CT-SCAN and X-RAY."
+      }
+    ],
+    "cashReception": [
+      {
+        "id": "cashReception-1780233456320",
+        "title": "radiology",
+        "imageUrl": "",
+        "pdfUrl": "",
+        "text": "Cash and Reception of our hospital provides 24 hrs service.Two staff is there serve the patients queries, on the day time which is from morning 6 to evening 7.one staff for night."
+      }
+    ],
+    "pharmacy": [
+      {
+        "id": "ph-1",
+        "title": "24-Hour Express In-Hospital Pharmacy",
+        "imageUrl": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80",
+        "pdfUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+      },
+      {
+        "id": "pharmacy-1780233603506",
+        "title": "pharmacy",
+        "imageUrl": "",
+        "pdfUrl": "",
+        "text": "We have one pharmacy department inside our hospital premise to ensuring that patients can receive the right medicine at the right time by an efficient and economical system"
+      }
+    ],
+    "ambulance": [
+      {
+        "id": "amb-1",
+        "title": "Rapid Ambulance Network",
+        "imageUrl": "https://images.unsplash.com/photo-1583324113626-70df0f4cedf2?auto=format&fit=crop&w=800&q=80",
+        "pdfUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+      },
+      {
+        "id": "ambulance-1780233640739",
+        "title": "ambulance",
+        "imageUrl": "",
+        "pdfUrl": "",
+        "text": "In-case of Emergency(other than RTA and all other emergencies)Please contact on our hospital's Land line phone number.\n\n    014381133\n\n    014383169\n\n    014352248\n\n    014357452\n\n\n"
+      }
+    ],
+    "preventiveHealth": [
+      {
+        "id": "prev-1",
+        "title": "Dhading Health Protection Packages",
+        "imageUrl": "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=800&q=80",
+        "pdfUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+      },
+      {
+        "id": "preventiveHealth-1780233682539",
+        "title": "health",
+        "imageUrl": "",
+        "pdfUrl": "",
+        "text": "Health Checkup Package\n\nGROUP A\n\nEXECUTIVE HEALTH CHECKUP PACKAGE PLAN (EHP)\n\n \n\n    Doctor's Consultation(Physician)\n    Blood Sugar Fasting\n    Lipid Profile\n    Uric Acid\n\n    Renal Function Test  (RFT)\n\n(Urea, Creatinine, Sodium, Potassium)\n\n    Complete Blood Count (CBC)\n    Liver Function Test\n    Blood Sugar PP\n    Urine Routine\n    Stool Routine\n    Electrocardiogram(ECG)\n    Echocardiogram(ECHO)\n    Chest X-Ray PA\n    Ultrasound Abdomen(USG)\n    Thyroid Function Test (TFT)\n\nGROUP B\n\n                                                                                               COMPREHENSIVE MEDICAL CHECK UP PACKAGE PLAN (CMC)\n\n \n\n    Doctor's Consultation (Physician)\n    Complete Blood\n    Count(CBC)\n    Blood Sugar Fasting\n    Renal Function Test (RFT)\n\n(Urea, Creatinine, Sodium, Potassium)\n\n    Liver Function Test\n    Lipid Profile\n    Urine Routine\n    Stool Routine\n    HIV  Spot\n    HBs AG\n    Electrocardiogram(ECG)\n    Chest X-Ray PA\n    Ultrasound Abdomen(USG)\n    Thyroid Function Test (TFT)\n\n \n\nGROUP C\n\nCOMPREHENSIVE CARDIAC CHECK UP PACKAGE PLAN (CCC)\n\n \n\n    Doctor's  Consultation (Physician)\n    Complete Blood Count (CBC)\n    Blood Sugar Fasting\n    Renal Function Test (RFT)\n\n(Urea, Creatinine, Sodium, Potassium)\n\n    Uric Acid\n    Lipid Profile\n    Urine Routine\n    Chest X-Ray PA\n    Electrocardiogram(ECG)\n    Echocardiogram(ECHO)\n    Ultrasound Abdomen(USG)\n\nGROUP D\n\nGENERAL HEALTH PACKAGE PLAN (GHP)\n\n \n\n    Doctor's Consultation\n    Complete Blood Count (CBC)\n    ESR\n    Blood Sugar R\n    Creatinine\n    Uric Acid\n    Urine Routine\n    Stool Routine\n    Chest X-Ray PA\n    Electrocardiogram(ECG)\n    Ultrasound Abdomen(USG)\n\nGROUP E\n\nCHILD HEALTH PACKAGE PLAN (CHP)\n\n \n\n    Doctor's Consultation (Pediatric)\n    Blood Sugar R\n    S. Calcium\n    Creatinine\n    Complete Bllod Count (CBC)\n    ESR\n    Urine Routine\n    Stool Routine\n    Chest X-Ray PA\n"
+      }
+    ]
+  },
+  "doctors": [
+    {
+      "id": "dr-1780198447469",
+      "name": "sunil sharma",
+      "experience": "11yr+",
+      "category": "Neuro Surgery",
+      "level": "senerutum",
+      "facebook": "",
+      "twitter": "",
+      "linkedin": "",
+      "number": "980000000",
+      "profilePicUrl": "https://i.postimg.cc/mPyD8pLF/Whats-App-Image-2026-05-30-at-9-27-20-PM.jpg[/img][/url]"
+    },
+    {
+      "id": "dr-1780198483918",
+      "name": "dd kamt",
+      "experience": "11",
+      "category": "Orthopedics, Trauma & Spine Surgery",
+      "level": "ee",
+      "facebook": "",
+      "twitter": "",
+      "linkedin": "",
+      "number": "9767888888",
+      "profilePicUrl": "https://i.postimg.cc/fVfLBqzV/Whats-App-Image-2026-05-30-at-9-27-19-PM(1).jpg[/img][/url]"
+    }
+  ],
+  "aboutUs": {
+    "introduction": {
+      "photoUrl": "https://i.postimg.cc/G2LR7Kg3/Whats-App-Image-2026-06-01-at-12-34-01-AM.jpg",
+      "details": "Dhading Hospital Pvt. Ltd. is a leading private multi-specialty healthcare facility located at Dhading, Nepal. Directed by a dedicated panel of compassionate specialists, standard certified medical workers, and diagnostics engineers, our aim is standard medical delivery with high efficacy and maximum affordability. Spread across spacious architectural space, we contain 100 fully loaded beds including ICU counters, clean digital X-rays, and highly accurate laboratory installations, operating 24 hours a day, 7 days a week."
+    },
+    "boardOfDirectors": [
+      {
+        "id": "bod-1780319063893",
+        "name": "Bikash Sapkota ",
+        "role": "chairman ",
+        "photoUrl": "https://i.postimg.cc/zv9KFyDX/Whats-App-Image-2026-05-31-at-11-51-02-PM.jpg"
+      },
+      {
+        "id": "bod-1780319168268",
+        "name": "kiran kumar wosti  ",
+        "role": "Transportation manager  ",
+        "photoUrl": "https://i.postimg.cc/J4ZPd8wm/Whats-App-Image-2026-06-01-at-1-31-53-AM.jpg"
+      },
+      {
+        "id": "bod-1780319230715",
+        "name": "Dr. Ajaj Acharya",
+        "role": "medical director",
+        "photoUrl": "https://i.postimg.cc/QdN1kZh9/Whats-App-Image-2026-05-31-at-10-50-12-PM.jpg"
+      }
+    ],
+    "chairmanMessage": {
+      "name": "Bikash Sapkota ",
+      "details": "Welcome to Dhading Hospital. Our ultimate aspiration is to nurture standard health infrastructure for residents and rural neighborhoods. By delivering economical solutions, cutting-edge therapies, and empathetic service, we hope to enrich lives for years to come.",
+      "whatsappNumber": " 9851451956",
+      "photoUrl": "https://i.postimg.cc/zv9KFyDX/Whats-App-Image-2026-05-31-at-11-51-02-PM.jpg"
+    },
+    "hospitalWorkingTeam": [
+      {
+        "id": "team-1780319539654",
+        "name": "Bikash Sapkota ",
+        "role": "chairman ",
+        "photoUrl": "https://i.postimg.cc/zv9KFyDX/Whats-App-Image-2026-05-31-at-11-51-02-PM.jpg"
+      }
+    ],
+    "careersText": "Join the premier healthcare provider in Dhading! We are currently looking for Senior Pathology Coordinators, Critical Care Unit Nurses (ICU/NICU), and Diagnostic Radiologists. Send your resume to careers@dhadinghospital.com.np or upload via our portal."
+  },
+  "patientData": {
+    "admissionDeskText": "Patient Admission Desk operates 24/7. When coming for admission, please bring your national identification card, insurance details, reference doctors guide, and prior laboratory diagnostics results. For advanced booking, call our cash desk directly.",
+    "appointment": [
+      {
+        "id": "apt-info-1",
+        "title": "Interactive Appointment Booking Guidelines & Hospital Fees",
+        "imageUrl": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80",
+        "pdfUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+      }
+    ]
+  },
+  "visitorData": {
+    "visitHour": [],
+    "dosAndDonts": [
+      {
+        "id": "dd-1",
+        "title": "Hygiene & Cleanliness regulations for Critical Care wards",
+        "imageUrl": "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80",
+        "pdfUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+      },
+      {
+        "id": "dd-1780237284327",
+        "title": "RULES",
+        "imageUrl": "https://i.postimg.cc/cJtTtbyn/Whats-App-Image-2026-05-31-at-8-08-05-AM.jpg",
+        "pdfUrl": ""
+      }
+    ],
+    "parking": [
+      {
+        "id": "pk-1",
+        "title": "Emergency and Visitor Ambulance Access & Parking Spaces",
+        "imageUrl": "https://images.unsplash.com/photo-1506015391300-4802dc74de2e?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "gallery": [
+    {
+      "id": "gal-1780319997394",
+      "title": "Dhading Hospital Event",
+      "imageUrl": "https://i.postimg.cc/tJytKZQf/Whats-App-Image-2026-05-31-at-11-44-16-PM-(2).jpg"
+    },
+    {
+      "id": "gal-1780320010369",
+      "title": "Dhading Hospital Event",
+      "imageUrl": "https://i.postimg.cc/L5RBcYKw/Whats-App-Image-2026-05-31-at-11-44-16-PM-(1).jpg"
+    },
+    {
+      "id": "gal-1780320029282",
+      "title": "Dhading Hospital Event",
+      "imageUrl": "https://i.postimg.cc/wMHcCy8n/Whats-App-Image-2026-05-31-at-11-44-16-PM.jpg"
+    },
+    {
+      "id": "gal-1780320053713",
+      "title": "Dhading Hospital Event",
+      "imageUrl": "https://i.postimg.cc/hvgbkzWH/Whats-App-Image-2026-05-31-at-11-44-15-PM-(1).jpg"
+    },
+    {
+      "id": "gal-1780320180489",
+      "title": "Dhading Hospital Event",
+      "imageUrl": "https://i.postimg.cc/Cx1Tydwx/Whats-App-Image-2026-05-31-at-10-52-50-PM.jpg"
+    },
+    {
+      "id": "gal-1780320211010",
+      "title": "Dhading Hospital Event",
+      "imageUrl": "https://i.postimg.cc/sf9tv52t/Whats-App-Image-2026-05-31-at-10-52-48-PM.jpg"
+    },
+    {
+      "id": "gal-1780320243177",
+      "title": "Dhading Hospital Event",
+      "imageUrl": "https://i.postimg.cc/WzXWS6FJ/Whats-App-Image-2026-05-31-at-10-52-46-PM.jpg"
+    },
+    {
+      "id": "gal-1780320262760",
+      "title": "Dhading Hospital Event",
+      "imageUrl": "https://i.postimg.cc/nLB3Nt9x/Whats-App-Image-2026-05-31-at-10-52-45-PM.jpg"
+    },
+    {
+      "id": "gal-1780320415177",
+      "title": "Dhading Hospital Event",
+      "imageUrl": "https://i.postimg.cc/zvjS8z8Q/Whats-App-Image-2026-05-31-at-11-44-14-PM-(1).jpg"
+    }
+  ],
+  "videos": [
+    {
+      "id": "vdo-1",
+      "title": "Hospital Walkthrough and Specialities Intro",
+      "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    {
+      "id": "vdo-2",
+      "title": "Free Health Camp Highlights - Dhading District",
+      "videoUrl": "https://www.tiktok.com"
+    }
+  ],
+  "news": [
+    {
+      "id": "news-1780321798376",
+      "title": "event with nepal police",
+      "detail": "event####",
+      "timeDate": "2026-06-03",
+      "imageUrl": "https://i.postimg.cc/BnXYcVTg/Whats-App-Image-2026-05-31-at-10-52-37-PM.jpg",
+      "images": []
+    }
+  ],
+  "priceList": [
+    {
+      "id": "price-1",
+      "title": "OPD, Lab Pathology, & Radiology Billing Price Guide 2026",
+      "pdfUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+    }
+  ],
+  "contact": {
+    "phone": "+977-10-520111",
+    "secondaryPhone": "+977-10-520222",
+    "ambulancePhone": "+977-9851000102",
+    "ambulancePicUrl": "https://i.postimg.cc/FsZzgPrz/Whats-App-Image-2026-06-01-at-1-28-10-AM.jpg",
+    "whatsappNumber": "9851451956",
+    "email": "info@dhadinghospital.com.np",
+    "address": "besi i, Dhading, Nepal",
+    "workingHours": "OPD Hours: Mon - Fri: 7am - 8pm | Sat - Sun: 10am - 5pm | Emergency 24/7",
+    "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14101.401037599553!2d84.91891961621528!3d27.921822830605923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb00dcfbebe543%3A0xc3fa5e966c891398!2sDhading%20Besi!5e0!3m2!1sne!2snp!4v1654317602082",
+    "facebookUrl": "https://facebook.com",
+    "youtubeUrl": "https://youtube.com",
+    "instagramUrl": "https://instagram.com"
+  },
+  "settings": {
+    "webName": "Dhading Hospital Pvt. Ltd.",
+    "logoUrl": "https://i.postimg.cc/Gpvz8KXz/Whats-App-Image-2026-05-31-at-3-22-33-AM.jpg",
+    "banners": [
+      {
+        "id": "b-1780320833592",
+        "title": "webcome to dhading hospital Pvt LTd",
+        "subtitle": "",
+        "imageUrl": "https://i.postimg.cc/G2LR7Kg3/Whats-App-Image-2026-06-01-at-12-34-01-AM.jpg"
+      },
+      {
+        "id": "b-1780320904183",
+        "title": "our doctors ",
+        "subtitle": "",
+        "imageUrl": "https://i.postimg.cc/pdMN6vXB/Whats-App-Image-2026-05-31-at-10-50-20-PM.jpg"
+      },
+      {
+        "id": "b-1780320966115",
+        "title": "our hospital ",
+        "subtitle": "",
+        "imageUrl": "https://i.postimg.cc/rFRPXHb2/Whats-App-Image-2026-05-31-at-10-52-50-PM(1).jpg"
+      },
+      {
+        "id": "b-1780321123287",
+        "title": "services",
+        "subtitle": "",
+        "imageUrl": "https://i.postimg.cc/fRB2xhSC/Whats-App-Image-2026-05-31-at-10-52-43-PM(1).jpg"
+      },
+      {
+        "id": "b-1780321155768",
+        "title": "services",
+        "subtitle": "",
+        "imageUrl": "https://i.postimg.cc/R02TRCSm/Whats-App-Image-2026-05-31-at-10-52-43-PM.jpg"
+      }
+    ],
+    "welcomeTitle": "Welcome to Dhading Hospital Pvt. Ltd.",
+    "welcomeText": "Dhading Hospital is a well equipped multi-speciality private hospital located in Dhading Besi. Led by a team of highly-trained doctors, nurses and tech specialists, we deliver state of the art diagnostics and ethical procedures. Our 100-bed unit hosts critical care setups, intensive ICU centers, interactive diagnostics, and a 24/7 pathology counter.",
+    "welcomeImage": "https://i.postimg.cc/G2LR7Kg3/Whats-App-Image-2026-06-01-at-12-34-01-AM.jpg",
+    "mapLink": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14101.401037599553!2d84.91891961621528!3d27.921822830605923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb00dcfbebe543%3A0xc3fa5e966c891398!2sDhading%20Besi!5e0!3m2!1sne!2snp!4v1654317602082",
+    "number": "9761290500 ",
+    "seoDescription": "Dhading Hospital Pvt. Ltd. represents multi-speciality diagnosis, ICU beds, pediatric surgeons, gynecology, and rapid 24/7 emergency response networks in Dhading."
+  },
+  "bookings": [],
+  "testimonials": [
+    {
+      "id": "testi-1",
+      "name": "Parash Acharya",
+      "address": "Bhairahawa",
+      "comment": "Economical medical treatment. I am very happy about the services provided by this hospital especially Dr. Geha Raj Dahal. In my opinion, GCH provides very good facilities in affordable price. Thank you."
+    },
+    {
+      "id": "testi-2",
+      "name": "Januka Oli",
+      "address": "Gorkha",
+      "comment": "The services and the medical attention received was top grade. The surgical procedures are affordable and handled with care."
+    }
+  ],
+  "events": [
+    {
+      "id": "event-1",
+      "day": "11th",
+      "monthYear": "Dec 2016",
+      "title": "Health camp in Nuwakot",
+      "subtitle": "Completed 3 Days of Free Health Camp in Dupchesor Mahadevsthan ,Nuwakot",
+      "imageUrl": "https://i.postimg.cc/DZ966vcx/Whats-App-Image-2026-05-31-at-11-44-12-PM.jpg"
+    }
+  ],
+  "qrCodes": [
+    {
+      "id": "qr-default-1",
+      "title": "Dhading Hospital official QR (Nabil Bank Ltd Fonepay)",
+      "imageUrl": "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=400&q=80"
+    }
+  ],
+  "machines": [
+    {
+      "id": "mach-1",
+      "title": "High-Resolution 4D Ultrasound (USG) Machine",
+      "imageUrl": "https://i.postimg.cc/bJswz8kB/Whats-App-Image-2026-05-31-at-10-52-40-PM.jpg",
+      "description": "Our high-resolution 4D Ultrasound is equipped with advanced Doppler imaging technology. It provides real-time anatomical detail for obstetrics, gynecology, cardiology, and abdominal diagnostic studies."
+    },
+    {
+      "id": "mach-2",
+      "title": "Fully Automated Hematology Analyzer",
+      "imageUrl": "https://i.postimg.cc/ydMssRVk/Whats-App-Image-2026-05-31-at-10-52-33-PM.jpg",
+      "description": "This is our next-generation laboratory analyzer. It offers 5-part white blood cell differential counts, giving accurate CBC reports within minutes, reducing patient wait-times significantly."
+    },
+    {
+      "id": "mach-3",
+      "title": "Digital Computed Radiography (X-Ray) System",
+      "imageUrl": "https://i.postimg.cc/7LcynzJm/Whats-App-Image-2026-05-31-at-10-52-42-PM.jpg",
+      "description": "A low-radiation digital radiography system offering crystal clear diagnostic skeletal imaging. Immediate image acquisition allows our surgeons and emergency team to assess traumas swiftly."
+    },
+    {
+      "id": "mach-1780321922160",
+      "title": "macjhine ",
+      "imageUrl": "https://i.postimg.cc/Y2DQfqdj/Whats-App-Image-2026-05-31-at-10-52-38-PM.jpg",
+      "description": "#####"
+    }
+  ]
+}

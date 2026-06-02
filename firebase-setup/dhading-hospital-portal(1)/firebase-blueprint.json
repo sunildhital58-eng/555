@@ -1,0 +1,27 @@
+{
+  "entities": {
+    "HospitalData": {
+      "title": "HospitalData",
+      "description": "Consolidated hospital setup entity storing categories, configuration, services, and dynamic assets.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "The dynamic payload value."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last updated timestamp"
+        }
+      },
+      "required": ["value", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/dhading_hospital/{documentId}": {
+      "schema": "HospitalData",
+      "description": "Dynamic configurations and lists for Dhading Hospital: settings, price lists, booking requests, doctors lists, patient information, events, testmonials, etc."
+    }
+  }
+}
