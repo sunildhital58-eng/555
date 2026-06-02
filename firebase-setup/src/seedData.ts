@@ -309,19 +309,49 @@ export const INITIAL_FOR_VISITORS: ForVisitors = {
 
 export const INITIAL_GALLERY: GalleryItem[] = [
   {
-    id: 'gal-1',
-    title: 'Dhading Hospital Outer Facade',
-    imageUrl: 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=800&q=80'
+    id: "gal-1780319997394",
+    title: "Dhading Hospital Event",
+    imageUrl: "https://i.postimg.cc/tJytKZQf/Whats-App-Image-2026-05-31-at-11-44-16-PM-(2).jpg"
   },
   {
-    id: 'gal-2',
-    title: 'Modern Modular ICU Unit',
-    imageUrl: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80'
+    id: "gal-1780320010369",
+    title: "Dhading Hospital Event",
+    imageUrl: "https://i.postimg.cc/L5RBcYKw/Whats-App-Image-2026-05-31-at-11-44-16-PM-(1).jpg"
   },
   {
-    id: 'gal-3',
-    title: 'Fully Automated Clinical Biochemistry Laboratory',
-    imageUrl: 'https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&w=800&q=80'
+    id: "gal-1780320029282",
+    title: "Dhading Hospital Event",
+    imageUrl: "https://i.postimg.cc/wMHcCy8n/Whats-App-Image-2026-05-31-at-11-44-16-PM.jpg"
+  },
+  {
+    id: "gal-1780320053713",
+    title: "Dhading Hospital Event",
+    imageUrl: "https://i.postimg.cc/hvgbkzWH/Whats-App-Image-2026-05-31-at-11-44-15-PM-(1).jpg"
+  },
+  {
+    id: "gal-1780320180489",
+    title: "Dhading Hospital Event",
+    imageUrl: "https://i.postimg.cc/Cx1Tydwx/Whats-App-Image-2026-05-31-at-10-52-50-PM.jpg"
+  },
+  {
+    id: "gal-1780320211010",
+    title: "Dhading Hospital Event",
+    imageUrl: "https://i.postimg.cc/sf9tv52t/Whats-App-Image-2026-05-31-at-10-52-48-PM.jpg"
+  },
+  {
+    id: "gal-1780320243177",
+    title: "Dhading Hospital Event",
+    imageUrl: "https://i.postimg.cc/WzXWS6FJ/Whats-App-Image-2026-05-31-at-10-52-46-PM.jpg"
+  },
+  {
+    id: "gal-1780320262760",
+    title: "Dhading Hospital Event",
+    imageUrl: "https://i.postimg.cc/nLB3Nt9x/Whats-App-Image-2026-05-31-at-10-52-45-PM.jpg"
+  },
+  {
+    id: "gal-1780320415177",
+    title: "Dhading Hospital Event",
+    imageUrl: "https://i.postimg.cc/zvjS8z8Q/Whats-App-Image-2026-05-31-at-11-44-14-PM-(1).jpg"
   }
 ];
 
@@ -340,18 +370,12 @@ export const INITIAL_VIDEOS: VideoItem[] = [
 
 export const INITIAL_NEWS: NewsItem[] = [
   {
-    id: 'news-1',
-    title: 'Free Mega Health Camp treating 600+ patients in Dhading rural municipalities',
-    detail: 'Dhading Hospital Pvt. Ltd. arranged a free mega health camp where 600 individuals were screened, diagnosed, and received fully free diagnostics along with general medicines.',
-    timeDate: '2026-05-15',
-    imageUrl: 'https://images.unsplash.com/photo-1504813184591-01552661c88c?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'news-2',
-    title: 'Dhading Hospital launches 24/7 Dialysis Setup & Advanced Computed Tomography Services',
-    detail: 'Our state-of-the-art dialysis beds and Computed Tomography (CT) facilities are now online 24/7 to provide local support for renal disease sufferers, backed by experienced nephrology nurses.',
-    timeDate: '2026-05-20',
-    imageUrl: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80'
+    id: "news-1780321798376",
+    title: "Event with Nepal Police",
+    detail: "Joint community health awareness event organized with Nepal Police.",
+    timeDate: "2026-06-03",
+    imageUrl: "https://i.postimg.cc/BnXYcVTg/Whats-App-Image-2026-05-31-at-10-52-37-PM.jpg",
+    images: []
   }
 ];
 
@@ -364,43 +388,61 @@ export const INITIAL_PRICE_LIST: PriceListItem[] = [
 ];
 
 export const INITIAL_CONTACT: ContactUsInfo = {
-  phone: '+977-10-520111',
-  secondaryPhone: '+977-10-520222',
-  ambulancePhone: '+977-9851000102',
-  ambulancePicUrl: 'https://images.unsplash.com/photo-1583324113626-70df0f4cedf2?auto=format&fit=crop&w=800&q=80',
-  whatsappNumber: '9851451956',
-  email: 'info@dhadinghospital.com.np',
-  address: 'Dhading Besi, Dhading, Nepal',
-  workingHours: 'OPD Hours: Mon - Fri: 7am - 8pm | Sat - Sun: 10am - 5pm | Emergency 24/7',
-  mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14101.401037599553!2d84.91891961621528!3d27.921822830605923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb00dcfbebe543%3A0xc3fa5e966c891398!2sDhading%20Besi!5e0!3m2!1sne!2snp!4v1654317602082',
-  facebookUrl: 'https://facebook.com',
-  youtubeUrl: 'https://youtube.com',
-  instagramUrl: 'https://instagram.com'
+  phone: "+977-10-520111",
+  secondaryPhone: "+977-10-520222",
+  ambulancePhone: "+977-9851000102",
+  ambulancePicUrl: "https://i.postimg.cc/FsZzgPrz/Whats-App-Image-2026-06-01-at-1-28-10-AM.jpg",
+  whatsappNumber: "9851451956",
+  email: "info@dhadinghospital.com.np",
+  address: "Besi I, Dhading, Nepal",
+  workingHours: "OPD Hours: Mon - Fri: 7am - 8pm | Sat - Sun: 10am - 5pm | Emergency 24/7",
+  mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14101.401037599553!2d84.91891961621528!3d27.921822830605923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb00dcfbebe543%3A0xc3fa5e966c891398!2sDhading%20Besi!5e0!3m2!1sne!2snp!4v1654317602082",
+  facebookUrl: "https://facebook.com",
+  youtubeUrl: "https://youtube.com",
+  instagramUrl: "https://instagram.com"
 };
 
 export const INITIAL_SETTINGS: WebSettings = {
-  webName: 'Dhading Hospital Pvt. Ltd.',
-  logoUrl: '',
+  webName: "Dhading Hospital Pvt. Ltd.",
+  logoUrl: "https://i.postimg.cc/Gpvz8KXz/Whats-App-Image-2026-05-31-at-3-22-33-AM.jpg",
   banners: [
     {
-      id: 'b1',
-      imageUrl: 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=1200&q=80',
-      title: 'DHADING MULTI-SPECIALTY CARE',
-      subtitle: 'Premium private hospital delivering exceptional, compassionate diagnostics and clinical solutions in Dhading district.'
+      id: "b-1780320833592",
+      title: "Welcome to Dhading Hospital Pvt Ltd",
+      subtitle: "",
+      imageUrl: "https://i.postimg.cc/G2LR7Kg3/Whats-App-Image-2026-06-01-at-12-34-01-AM.jpg"
     },
     {
-      id: 'b2',
-      imageUrl: 'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1200&q=80',
-      title: '24/7 EMERGENCY & ADMISSION',
-      subtitle: 'Standby elite trauma surgeons, high response transport systems and fully automated clinical laboratories.'
+      id: "b-1780320904183",
+      title: "Our Doctors",
+      subtitle: "",
+      imageUrl: "https://i.postimg.cc/pdMN6vXB/Whats-App-Image-2026-05-31-at-10-50-20-PM.jpg"
+    },
+    {
+      id: "b-1780320966115",
+      title: "Our Hospital",
+      subtitle: "",
+      imageUrl: "https://i.postimg.cc/rFRPXHb2/Whats-App-Image-2026-05-31-at-10-52-50-PM(1).jpg"
+    },
+    {
+      id: "b-1780321123287",
+      title: "Services",
+      subtitle: "",
+      imageUrl: "https://i.postimg.cc/fRB2xhSC/Whats-App-Image-2026-05-31-at-10-52-43-PM(1).jpg"
+    },
+    {
+      id: "b-1780321155768",
+      title: "Services",
+      subtitle: "",
+      imageUrl: "https://i.postimg.cc/R02TRCSm/Whats-App-Image-2026-05-31-at-10-52-43-PM.jpg"
     }
   ],
-  welcomeTitle: 'Welcome to Dhading Hospital Pvt. Ltd.',
-  welcomeText: 'Dhading Hospital is a well equipped multi-speciality private hospital located in Dhading Besi. Led by a team of highly-trained doctors, nurses and tech specialists, we deliver state of the art diagnostics and ethical procedures. Our 100-bed unit hosts critical care setups, intensive ICU centers, interactive diagnostics, and a 24/7 pathology counter.',
-  welcomeImage: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80',
-  mapLink: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14101.401037599553!2d84.91891961621528!3d27.921822830605923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb00dcfbebe543%3A0xc3fa5e966c891398!2sDhading%20Besi!5e0!3m2!1sne!2snp!4v1654317602082',
-  number: '+977-10-520111',
-  seoDescription: 'Dhading Hospital Pvt. Ltd. represents multi-speciality diagnosis, ICU beds, pediatric surgeons, gynecology, and rapid 24/7 emergency response networks in Dhading.'
+  welcomeTitle: "Welcome to Dhading Hospital Pvt. Ltd.",
+  welcomeText: "Dhading Hospital is a well equipped multi-speciality private hospital located in Dhading Besi. Led by a team of highly-trained doctors, nurses and tech specialists, we deliver state of the art diagnostics and ethical procedures. Our 100-bed unit hosts critical care setups, intensive ICU centers, interactive diagnostics, and a 24/7 pathology counter.",
+  welcomeImage: "https://i.postimg.cc/G2LR7Kg3/Whats-App-Image-2026-06-01-at-12-34-01-AM.jpg",
+  mapLink: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14101.401037599553!2d84.91891961621528!3d27.921822830605923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb00dcfbebe543%3A0xc3fa5e966c891398!2sDhading%20Besi!5e0!3m2!1sne!2snp!4v1654317602082",
+  number: "9761290500",
+  seoDescription: "Dhading Hospital Pvt. Ltd. represents multi-speciality diagnosis, ICU beds, pediatric surgeons, gynecology, and rapid 24/7 emergency response networks in Dhading."
 };
 
 export const INITIAL_BOOKINGS: BookingRequest[] = [
@@ -420,35 +462,27 @@ export const INITIAL_BOOKINGS: BookingRequest[] = [
 
 export const INITIAL_TESTIMONIALS: TestimonialItem[] = [
   {
-    id: 'testi-1',
-    name: 'Parash Acharya',
-    address: 'Bhairahawa',
-    comment: 'Economical medical treatment. I am very happy about the services provided by this hospital especially Dr. Geha Raj Dahal. In my opinion, Dhading Hospital provides very good facilities in affordable price. Thank you.'
+    id: "testi-1",
+    name: "Parash Acharya",
+    address: "Bhairahawa",
+    comment: "Economical medical treatment. I am very happy about the services provided by this hospital especially Dr. Geha Raj Dahal. In my opinion, Dhading Hospital provides very good facilities in affordable price. Thank you."
   },
   {
-    id: 'testi-2',
-    name: 'Januka Oli',
-    address: 'Gorkha',
-    comment: 'The services and the medical attention received was top grade. The surgical procedures are affordable and handled with care.'
+    id: "testi-2",
+    name: "Januka Oli",
+    address: "Gorkha",
+    comment: "The services and the medical attention received was top grade. The surgical procedures are affordable and handled with care."
   }
 ];
 
 export const INITIAL_EVENTS: HospitalEventItem[] = [
   {
-    id: 'event-1',
-    day: '11th',
-    monthYear: 'Dec 2016',
-    title: 'Health camp in Nuwakot',
-    subtitle: 'Completed 3 Days of Free Health Camp in Dupchesor Mahadevsthan ,Nuwakot',
-    imageUrl: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'event-2',
-    day: '3rd',
-    monthYear: 'Mar 2023',
-    title: 'ग्रीनसिटी हस्पिटलमा ३० किलोको ट्युमरको शल्यक्रिया, उपचार नि:शुल्क',
-    subtitle: 'ग्रीनसिटी हस्पिटलमा एक महिलाको पेटमा रहेको ३० किलोभन्दा बढीको ट्युमरको शल्यक्रिया सफल र उपचार नि:शुल्क गरिएको छ ।',
-    imageUrl: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80'
+    id: "event-1",
+    day: "11th",
+    monthYear: "Dec 2016",
+    title: "Health camp in Nuwakot",
+    subtitle: "Completed 3 Days of Free Health Camp in Dupchesor Mahadevsthan, Nuwakot",
+    imageUrl: "https://i.postimg.cc/DZ966vcx/Whats-App-Image-2026-05-31-at-11-44-12-PM.jpg"
   }
 ];
 
