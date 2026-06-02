@@ -40,26 +40,26 @@ export default function BannerSlider({ banners }: BannerSliderProps) {
   const current = banners[currentIndex];
 
   return (
-    <div className="relative w-full h-[380px] md:h-[520px] overflow-hidden bg-slate-900 group">
+    <div className="relative w-full h-[280px] sm:h-[360px] md:h-[520px] overflow-hidden bg-slate-900 group">
       {/* Dynamic Slide Background with parallax fade effect */}
       <div className="absolute inset-0 transition-opacity duration-1000 ease-in-out">
         <img
           src={current.imageUrl || "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=1200&q=80"}
           alt={current.title}
-          className="w-full h-full object-cover opacity-100 transform scale-102 transition-transform duration-[6000ms]"
+          className="w-full h-full object-cover object-center opacity-100 transform scale-102 transition-transform duration-[6000ms]"
         />
         {/* Soft elegant bottom gradient to make centered text exceptionally crisp and readable */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
       </div>
 
       {/* Slide Captions - Centered at the bottom exactly like the reference screenshot */}
-      <div className="absolute bottom-10 sm:bottom-14 left-1/2 -translate-x-1/2 w-full max-w-4xl px-6 text-center z-10">
+      <div className="absolute bottom-6 sm:bottom-10 md:bottom-14 left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 sm:px-6 text-center z-10">
         <div className="space-y-2 animate-in fade-in slide-in-from-bottom-4 duration-700">
-          <h2 className="text-xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight text-white uppercase drop-shadow-[0_3px_6px_rgba(0,0,0,0.95)]">
+          <h2 className="text-lg sm:text-3xl md:text-5xl font-black tracking-tight leading-tight text-white uppercase drop-shadow-[0_3px_6px_rgba(0,0,0,0.95)]">
             {current.title}
           </h2>
           {current.subtitle && (
-            <p className="text-[11px] sm:text-sm md:text-base text-gray-150 max-w-3xl mx-auto font-medium leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">
+            <p className="text-[10px] sm:text-sm md:text-base text-gray-150 max-w-3xl mx-auto font-medium leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]">
               {current.subtitle}
             </p>
           )}

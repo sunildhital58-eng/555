@@ -408,8 +408,8 @@ export default function App() {
                     </h3>
                     <p className="text-[10px] text-gray-400 font-semibold leading-tight">Instant-response patient service & health links</p>
                   </div>
-                  <span className="text-[9px] bg-red-100 text-red-600 font-black px-2 py-0.5 rounded-full uppercase tracking-wider animate-pulse">
-                    On-Call Support
+                  <span className="text-[9px] bg-emerald-100 text-emerald-600 font-black px-2 py-0.5 rounded-full uppercase tracking-wider animate-pulse">
+                    24/7 Emergency Support
                   </span>
                 </div>
 
@@ -445,9 +445,9 @@ export default function App() {
                     },
                     {
                       label: "Ambulance",
-                      icon: <Phone className="size-5 text-red-600 animate-bounce" />,
+                      icon: <Phone className="size-5 text-emerald-600 animate-bounce" />,
                       href: `tel:${contact.ambulancePhone || "9851000102"}`,
-                      color: "text-red-700 bg-red-50 border-red-100/50"
+                      color: "text-emerald-700 bg-emerald-50 border-emerald-100/50"
                     },
                     {
                       label: "WhatsApp",
