@@ -461,7 +461,7 @@ export default function AdminPanel({
                 <Calendar className="size-4" /> Real-time Bookings
               </span>
               {bookings.length > 0 && (
-                <span className="bg-red-500 text-white font-mono font-bold px-1.5 py-0.5 rounded-full text-xs">
+                <span className="bg-[#00A64C] text-white font-mono font-bold px-1.5 py-0.5 rounded-full text-xs">
                   {bookings.length}
                 </span>
               )}
@@ -608,7 +608,7 @@ export default function AdminPanel({
         <div className="p-4 border-t border-gray-800 bg-[#161616]">
           <button
             onClick={onExit}
-            className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-sm cursor-pointer transition-colors"
+            className="w-full flex items-center justify-center gap-2 bg-[#00A64C] hover:bg-[#008C3E] text-white font-bold py-2 px-4 rounded-lg text-sm cursor-pointer transition-colors"
           >
             <LogOut className="size-4" /> Back to Hospital Web
           </button>
