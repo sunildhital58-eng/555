@@ -80,11 +80,23 @@ export default function AdminPanel({
   const [saveStatus, setSaveStatus] = useState<{ text: string; isError: boolean } | null>(null);
 
   // Mailbox helper states
-  const [mailSystem, setMailSystem] = useState(contact?.mailSystem || { mailboxes: [] });
+  const [mailSystem, setMailSystem] = useState(contact?.mailSystem || { 
+    mailboxes: [
+      { id: '1', name: 'Hospital Mailbox', email: 'info@dhadinghospital.com.np', password: 'hosp2024', messages: [] },
+      { id: '2', name: 'Chairman Mailbox', email: 'chairman@dhadinghospital.com.np', password: 'chair2024', messages: [] },
+      { id: '3', name: 'Reception Mailbox', email: 'reception@dhadinghospital.com.np', password: 'recep2024', messages: [] },
+      { id: '4', name: 'Account Mailbox', email: 'account@dhadinghospital.com.np', password: 'acct2024', messages: [] },
+      { id: '5', name: 'Pathology Mailbox', email: 'pathology@dhadinghospital.com.np', password: 'path2024', messages: [] },
+      { id: '6', name: 'Medical Director Mailbox', email: 'medicaldirector@dhadinghospital.com.np', password: 'med2024', messages: [] }
+    ]
+  });
   const [selectedMailbox, setSelectedMailbox] = useState<any>(null);
   const [mailboxComposeView, setMailboxComposeView] = useState(false);
   const [composeForm, setComposeForm] = useState({ to: '', subject: '', message: '' });
   const [selectedMessage, setSelectedMessage] = useState<any>(null);
+  const [editingMailbox, setEditingMailbox] = useState<any>(null);
+  const [editMailboxName, setEditMailboxName] = useState('');
+  const [editMailboxEmail, setEditMailboxEmail] = useState('');
 
   // Service helper states
   const [selectedServiceCategory, setSelectedServiceCategory] = useState<keyof Services>('opd');
@@ -968,7 +980,7 @@ export default function AdminPanel({
                           2. Write each diagnostic test or checkup feature on its own **new line** below that.
                         </p>
                         <p className="italic font-bold text-[#00A64C]">
-                          नेपाली: पहिलो हरफमा `Price: Rs. ५,०००/-` लेख्नुहोस् र तल प्रत्येक लाइनमा फरक-फरक जाचँको नाम लेख्नुहोस्। ती जाचँहरु स्वतः Checkbox लिस्टमा देखिनेछन्���
+                          नेपाली: पहिलो हरफमा `Price: Rs. ५,०००/-` लेख्नुहोस् र तल प्रत्येक लाइनमा फरक-फरक जाचँको नाम लेख्नुहोस्। ती जाचँहरु स्वतः Checkbox लिस्टमा देखिनेछ��्���
                         </p>
                       </div>
                     )}
@@ -1377,18 +1389,30 @@ export default function AdminPanel({
                       </div>
                       <p className="text-xs text-gray-700 mb-3 break-all">{box.email}</p>
                       <p className="text-xs text-gray-600 mb-3">Password: <span className="font-mono">••••••••</span></p>
-                      <button
-                        onClick={() => {
-                          setMailSystem(prev => ({
-                            ...prev,
-                            mailboxes: (prev.mailboxes || []).filter(m => m.id !== box.id)
-                          }));
-                          setSaveStatus({ text: 'Mailbox deleted! Click Save to persist changes.', isError: false });
-                        }}
-                        className="w-full bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded text-xs font-bold transition-colors cursor-pointer"
-                      >
-                        Delete
-                      </button>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => {
+                            setEditingMailbox(box);
+                            setEditMailboxName(box.name);
+                            setEditMailboxEmail(box.email);
+                          }}
+                          className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded text-xs font-bold transition-colors cursor-pointer"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => {
+                            setMailSystem(prev => ({
+                              ...prev,
+                              mailboxes: (prev.mailboxes || []).filter(m => m.id !== box.id)
+                            }));
+                            setSaveStatus({ text: 'Mailbox deleted! Click Save to persist changes.', isError: false });
+                          }}
+                          className="flex-1 bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded text-xs font-bold transition-colors cursor-pointer"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   ))
                 ) : (
@@ -1398,6 +1422,65 @@ export default function AdminPanel({
                   </div>
                 )}
               </div>
+
+              {/* Edit Mailbox Modal */}
+              {editingMailbox && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+                  <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl">
+                    <h3 className="text-lg font-bold text-gray-900 mb-4">Edit Mailbox</h3>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-xs font-bold text-gray-700 mb-2">Mailbox Name</label>
+                        <input
+                          type="text"
+                          value={editMailboxName}
+                          onChange={(e) => setEditMailboxName(e.target.value)}
+                          className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label className="block text-xs font-bold text-gray-700 mb-2">Email Address</label>
+                        <input
+                          type="email"
+                          value={editMailboxEmail}
+                          onChange={(e) => setEditMailboxEmail(e.target.value)}
+                          className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                        />
+                      </div>
+
+                      <div className="flex gap-3 pt-4">
+                        <button
+                          onClick={() => {
+                            if (editMailboxName && editMailboxEmail) {
+                              setMailSystem(prev => ({
+                                ...prev,
+                                mailboxes: (prev.mailboxes || []).map(m =>
+                                  m.id === editingMailbox.id
+                                    ? { ...m, name: editMailboxName, email: editMailboxEmail }
+                                    : m
+                                )
+                              }));
+                              setEditingMailbox(null);
+                              setSaveStatus({ text: 'Mailbox updated! Click Save to persist changes.', isError: false });
+                            }
+                          }}
+                          className="flex-1 bg-[#00A64C] hover:bg-[#006830] text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors"
+                        >
+                          Save Changes
+                        </button>
+                        <button
+                          onClick={() => setEditingMailbox(null)}
+                          className="flex-1 bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
