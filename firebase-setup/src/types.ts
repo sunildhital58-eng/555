@@ -226,3 +226,14 @@ export interface HospitalMailSystem {
     medicalDirector: string;
   };
 }
+
+export interface StaffMember {
+  id: string;
+  name: string;
+  position: string;
+  department?: string;
+  photoUrl: string;
+  bio?: string;
+  phone?: string;
+  createdAt?: number;
+}

@@ -6,7 +6,7 @@ import {
 import { 
   Services, Doctor, AboutUs, ForPatient, ForVisitors, GalleryItem, 
   VideoItem, NewsItem, PriceListItem, ContactUsInfo, WebSettings, BookingRequest, ServiceItem,
-  TestimonialItem, HospitalEventItem, QRCodeItem, MachineItem
+  TestimonialItem, HospitalEventItem, QRCodeItem, MachineItem, StaffMember
 } from '../types';
 import { saveDocument } from '../firebase';
 
@@ -47,6 +47,8 @@ interface AdminPanelProps {
   setQrCodes: React.Dispatch<React.SetStateAction<QRCodeItem[]>>;
   machines: MachineItem[];
   setMachines: React.Dispatch<React.SetStateAction<MachineItem[]>>;
+  girlsStaff: StaffMember[];
+  setGirlsStaff: React.Dispatch<React.SetStateAction<StaffMember[]>>;
   onExit: () => void;
 }
 
@@ -405,6 +407,7 @@ export default function AdminPanel({
         saveDocument('categories', categories),
         saveDocument('services', services),
         saveDocument('doctors', doctors),
+        saveDocument('girlsStaff', girlsStaff),
         saveDocument('aboutUs', aboutUs),
         saveDocument('patientData', patientData),
         saveDocument('visitorData', visitorData),
@@ -483,6 +486,15 @@ export default function AdminPanel({
               }`}
             >
               <Users className="size-4" /> Doctors & Departments
+            </button>
+
+            <button
+              onClick={() => setActiveSubTab('girlsStaff')}
+              className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors cursor-pointer ${
+                activeSubTab === 'girlsStaff' ? 'bg-[#00A64C] text-white' : 'hover:bg-gray-800'
+              }`}
+            >
+              <Users className="size-4" /> Girls/Women Staff
             </button>
 
             <button
@@ -1288,6 +1300,121 @@ export default function AdminPanel({
                 )}
               </div>
 
+            </div>
+          </div>
+        )}
+
+        {/* Tab 3: Girls/Women Staff */}
+        {activeSubTab === 'girlsStaff' && (
+          <div className="space-y-6">
+            <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs">
+              <h3 className="text-[#006830] text-lg font-bold mb-2 flex items-center gap-2">
+                <Users className="size-5 text-[#00A64C]" />
+                Girls/Women Staff Management
+              </h3>
+              <p className="text-xs text-gray-500 pb-4">Add, edit, and manage hospital girls and women staff profiles including doctors, nurses, and support staff.</p>
+
+              {/* Add Staff Form */}
+              <form className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-4 mb-6">
+                <h4 className="text-xs uppercase font-extrabold text-gray-700 tracking-wider">➕ Add New Staff Member</h4>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  <input
+                    type="text"
+                    placeholder="Full Name"
+                    id="girl_staff_name"
+                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded bg-white focus:outline-none"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Position/Title"
+                    id="girl_staff_position"
+                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded bg-white focus:outline-none"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Department"
+                    id="girl_staff_department"
+                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded bg-white focus:outline-none"
+                  />
+                  <input
+                    type="url"
+                    placeholder="Photo URL"
+                    id="girl_staff_photo"
+                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded bg-white focus:outline-none"
+                  />
+                  <input
+                    type="tel"
+                    placeholder="Phone Number"
+                    id="girl_staff_phone"
+                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded bg-white focus:outline-none"
+                  />
+                  <textarea
+                    placeholder="Bio/Description"
+                    id="girl_staff_bio"
+                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded bg-white focus:outline-none col-span-1 sm:col-span-2 md:col-span-3"
+                  />
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    const name = (document.getElementById('girl_staff_name') as HTMLInputElement).value;
+                    const position = (document.getElementById('girl_staff_position') as HTMLInputElement).value;
+                    const department = (document.getElementById('girl_staff_department') as HTMLInputElement).value;
+                    const photoUrl = (document.getElementById('girl_staff_photo') as HTMLInputElement).value;
+                    const phone = (document.getElementById('girl_staff_phone') as HTMLInputElement).value;
+                    const bio = (document.getElementById('girl_staff_bio') as HTMLTextAreaElement).value;
+
+                    if (name && position && photoUrl) {
+                      const newStaff: StaffMember = {
+                        id: Date.now().toString(),
+                        name,
+                        position,
+                        department,
+                        photoUrl,
+                        phone,
+                        bio,
+                        createdAt: Date.now()
+                      };
+
+                      setGirlsStaff(prev => [...prev, newStaff]);
+                      (document.getElementById('girl_staff_name') as HTMLInputElement).value = '';
+                      (document.getElementById('girl_staff_position') as HTMLInputElement).value = '';
+                      (document.getElementById('girl_staff_department') as HTMLInputElement).value = '';
+                      (document.getElementById('girl_staff_photo') as HTMLInputElement).value = '';
+                      (document.getElementById('girl_staff_phone') as HTMLInputElement).value = '';
+                      (document.getElementById('girl_staff_bio') as HTMLTextAreaElement).value = '';
+                      setSaveStatus({ text: 'Staff added! Click Save to persist changes.', isError: false });
+                    }
+                  }}
+                  className="w-full bg-[#00A64C] hover:bg-[#006830] text-white px-4 py-2 rounded text-xs font-bold transition-colors cursor-pointer"
+                >
+                  Add Staff Member
+                </button>
+              </form>
+
+              {/* Staff Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {girlsStaff.map(staff => (
+                  <div key={staff.id} className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-300 rounded-lg p-4">
+                    {staff.photoUrl && (
+                      <img src={staff.photoUrl} alt={staff.name} className="w-full h-40 object-cover rounded-lg mb-3" />
+                    )}
+                    <h4 className="font-bold text-gray-900 text-sm">{staff.name}</h4>
+                    <p className="text-xs text-gray-700">{staff.position}</p>
+                    {staff.department && <p className="text-xs text-gray-600">{staff.department}</p>}
+                    {staff.bio && <p className="text-xs text-gray-600 mt-2">{staff.bio}</p>}
+                    {staff.phone && <p className="text-xs text-gray-600 mt-1">{staff.phone}</p>}
+                    <button
+                      onClick={() => setGirlsStaff(prev => prev.filter(s => s.id !== staff.id))}
+                      className="mt-3 w-full bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded text-xs font-bold transition-colors cursor-pointer"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}

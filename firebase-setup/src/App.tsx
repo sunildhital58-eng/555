@@ -4,13 +4,13 @@ import {
   ChevronRight, ChevronDown, Users, Eye, Image, Play, Key, Calendar, ArrowRight, ShieldAlert,
   Download, Sparkles, MessageCircle, Heart, ThumbsUp, Trash2, ArrowUpRight, Lock, Facebook, Twitter, Linkedin, X, Search, CheckCircle2
 } from 'lucide-react';
-import { Services, Doctor, AboutUs, ForPatient, ForVisitors, GalleryItem, VideoItem, NewsItem, PriceListItem, ContactUsInfo, WebSettings, BookingRequest, TestimonialItem, HospitalEventItem, QRCodeItem, MachineItem, MailBox, HospitalMailSystem } from './types';
+import { Services, Doctor, AboutUs, ForPatient, ForVisitors, GalleryItem, VideoItem, NewsItem, PriceListItem, ContactUsInfo, WebSettings, BookingRequest, TestimonialItem, HospitalEventItem, QRCodeItem, MachineItem, MailBox, HospitalMailSystem, StaffMember } from './types';
 import { DETAILED_PRICE_LIST } from './priceListData';
 import { 
   INITIAL_CATEGORIES, INITIAL_SERVICES, INITIAL_DOCTORS, INITIAL_ABOUT_US, 
   INITIAL_FOR_PATIENT, INITIAL_FOR_VISITORS, INITIAL_GALLERY, INITIAL_VIDEOS, 
   INITIAL_NEWS, INITIAL_PRICE_LIST, INITIAL_CONTACT, INITIAL_SETTINGS, INITIAL_BOOKINGS,
-  INITIAL_TESTIMONIALS, INITIAL_EVENTS, INITIAL_MACHINES, INITIAL_QR_CODES, INITIAL_MAIL_SYSTEM
+  INITIAL_TESTIMONIALS, INITIAL_EVENTS, INITIAL_MACHINES, INITIAL_QR_CODES, INITIAL_MAIL_SYSTEM, INITIAL_GIRLS_STAFF
 } from './seedData';
 import { getWhatsAppLink, parseVideoEmbed, getYouTubeThumbnail } from './utils';
 import { listenToDocument, saveDocument } from './firebase';
@@ -59,6 +59,11 @@ export default function App() {
   const [doctors, setDoctors] = useState<Doctor[]>(() => {
     const saved = localStorage.getItem('dh_doctors');
     return saved ? JSON.parse(saved) : INITIAL_DOCTORS;
+  });
+
+  const [girlsStaff, setGirlsStaff] = useState<StaffMember[]>(() => {
+    const saved = localStorage.getItem('dh_girls_staff');
+    return saved ? JSON.parse(saved) : INITIAL_GIRLS_STAFF;
   });
 
   const [aboutUs, setAboutUs] = useState<AboutUs>(() => {
@@ -178,6 +183,7 @@ export default function App() {
     unsubscribers.push(listenToDocument('categories', setCategories));
     unsubscribers.push(listenToDocument('services', setServices));
     unsubscribers.push(listenToDocument('doctors', setDoctors));
+    unsubscribers.push(listenToDocument('girlsStaff', setGirlsStaff));
     unsubscribers.push(listenToDocument('aboutUs', setAboutUs));
     unsubscribers.push(listenToDocument('patientData', setPatientData));
     unsubscribers.push(listenToDocument('visitorData', setVisitorData));
@@ -354,6 +360,8 @@ export default function App() {
         setQrCodes={setQrCodes}
         machines={machines}
         setMachines={setMachines}
+        girlsStaff={girlsStaff}
+        setGirlsStaff={setGirlsStaff}
         onExit={() => setIsAdminView(false)}
       />
     );
@@ -2068,7 +2076,7 @@ export default function App() {
 🩺 विशेषज्ञ चिकित्सक: ${meetDocName || 'Specialist Officer'}
 ✉ बिरामीको गुनासो/लक्षण: ${meetMessage || 'N/A'}
 
-[यो बुकिङ अनुरोध अस्पतालको डिजिटल डेस्क वेबपेजबाट स्वचालित रूपमा तयार पारिएको हो। कृपय��� मेरो अपोइन्टमेन्ट समय निश्चित गरिदिनुहोला। ]`;
+[यो बुकिङ अनुरोध अस्पतालको डिजिटल डेस्क वेबपेजबाट स्वचालित रूपमा तयार पारिएको हो। कृपय����� मेरो अपोइन्टमेन्ट समय निश्चित गरिदिनुहोला। ]`;
 
                   const encodedText = encodeURIComponent(bookingText);
                   const waLink = `https://wa.me/${finalDoctorPhone}?text=${encodedText}`;

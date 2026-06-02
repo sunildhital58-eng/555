@@ -16,7 +16,8 @@ import {
   QRCodeItem,
   MachineItem,
   MailBox,
-  HospitalMailSystem
+  HospitalMailSystem,
+  StaffMember
 } from './types';
 
 export const INITIAL_CATEGORIES: string[] = [
@@ -523,3 +524,46 @@ export const INITIAL_MAIL_SYSTEM: HospitalMailSystem = {
     medicalDirector: 'medicaldirector@dhadinghospital.com.np'
   }
 };
+
+export const INITIAL_GIRLS_STAFF: StaffMember[] = [
+  {
+    id: 'girl-staff-1',
+    name: 'Mrs. Sajina Dahal',
+    position: 'Nursing Director',
+    department: 'Nursing',
+    photoUrl: 'https://images.unsplash.com/photo-1594824813573-24643433b96f?auto=format&fit=crop&w=400&q=80',
+    bio: 'Experienced nursing director with 12+ years in healthcare management',
+    phone: '+977-9851234567',
+    createdAt: Date.now()
+  },
+  {
+    id: 'girl-staff-2',
+    name: 'Mrs. Dhana Pudasaini',
+    position: 'Account Officer',
+    department: 'Finance',
+    photoUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
+    bio: 'Expert in hospital accounting and financial management',
+    phone: '+977-9851345678',
+    createdAt: Date.now()
+  },
+  {
+    id: 'girl-staff-3',
+    name: 'Mrs. Ganga Humaghai',
+    position: 'Nursing & Support Chief',
+    department: 'Support Services',
+    photoUrl: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80',
+    bio: 'Chief of nursing and supportive service operations',
+    phone: '+977-9851456789',
+    createdAt: Date.now()
+  },
+  {
+    id: 'girl-staff-4',
+    name: 'Dr. Rupa Jha',
+    position: 'Senior Gynecologist',
+    department: 'Obstetrics & Gynecology',
+    photoUrl: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80',
+    bio: 'Senior gynecologist with 10 years of clinical experience',
+    phone: '+977-9851567890',
+    createdAt: Date.now()
+  }
+];
