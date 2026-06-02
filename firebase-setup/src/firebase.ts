@@ -1,13 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { 
-  getFirestore, 
-  doc, 
-  getDoc, 
-  setDoc,
-  getDocFromServer,
-  onSnapshot
-} from "firebase/firestore";
-import { getDatabase, ref, onValue, set, remove } from "firebase/database";
+import { getDatabase, ref, onValue, set, remove, update } from "firebase/database";
 
 // Firebase configuration for fir-1-cf2a6 project
 const firebaseConfig = {
@@ -21,95 +13,84 @@ const firebaseConfig = {
   measurementId: "G-3BBP4WcNG"
 };
 
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
 export const rtdb = getDatabase(app);
 
-// Operational helper for error mapping and context defined in the skill
-export enum OperationType {
-  CREATE = "create",
-  UPDATE = "update",
-  DELETE = "delete",
-  LIST = "list",
-  GET = "get",
-  WRITE = "write",
-}
+console.log("[v0] Firebase RTDB initialized with databaseURL:", firebaseConfig.databaseURL);
 
-interface FirestoreErrorInfo {
-  error: string;
-  operationType: OperationType;
-  path: string | null;
-  authInfo: {
-    userId?: string | null;
-    email?: string | null;
-  };
-}
-
-export function handleFirestoreError(error: unknown, operationType: OperationType, path: string | null) {
-  const errInfo: FirestoreErrorInfo = {
-    error: error instanceof Error ? error.message : String(error),
-    authInfo: {
-      userId: null,
-      email: null,
-    },
-    operationType,
-    path
-  };
-  console.error("Firestore Error: ", JSON.stringify(errInfo));
-  throw new Error(JSON.stringify(errInfo));
-}
-
-// Simple helpers to fetch and write specific documents
-export async function fetchDocument(documentName: string, fallback: any) {
-  try {
-    const docRef = doc(db, "dhading_hospital", documentName);
-    const snap = await getDoc(docRef);
-    if (snap.exists()) {
-      return snap.data().value;
-    }
-  } catch (err) {
-    console.error(`Error fetching ${documentName} from Firebase, using fallback:`, err);
-  }
-  return fallback;
-}
-
+// Save document to RTDB
 export async function saveDocument(documentName: string, data: any) {
   try {
-    const docRef = doc(db, "dhading_hospital", documentName);
-    await setDoc(docRef, { value: data, updatedAt: new Date().toISOString() });
+    console.log(`[v0] Saving to RTDB: ${documentName}`, data);
+    const dbRef = ref(rtdb, documentName);
+    await set(dbRef, data);
+    console.log(`[v0] ✅ Successfully saved ${documentName} to RTDB`);
+    return true;
   } catch (err) {
-    handleFirestoreError(err, OperationType.WRITE, `dhading_hospital/${documentName}`);
+    console.error(`[v0] ❌ Error saving ${documentName} to RTDB:`, err);
+    return false;
   }
 }
 
-// Real-time listener for a specific document - returns unsubscribe function
+// Listen to document changes in real-time
 export function listenToDocument(documentName: string, callback: (data: any) => void) {
   try {
-    const docRef = doc(db, "dhading_hospital", documentName);
-    const unsubscribe = onSnapshot(docRef, (snap) => {
-      if (snap.exists()) {
-        callback(snap.data().value);
+    console.log(`[v0] Setting up real-time listener for: ${documentName}`);
+    const dbRef = ref(rtdb, documentName);
+    
+    const unsubscribe = onValue(
+      dbRef,
+      (snapshot) => {
+        try {
+          if (snapshot.exists()) {
+            const data = snapshot.val();
+            console.log(`[v0] 🔄 Updated from RTDB (${documentName}):`, data);
+            callback(data);
+          } else {
+            console.log(`[v0] No data found for ${documentName}`);
+            // Don't call callback if no data - let state use initial value
+          }
+        } catch (err) {
+          console.error(`[v0] Error in snapshot callback for ${documentName}:`, err);
+        }
+      },
+      (err) => {
+        console.error(`[v0] ❌ Error listening to ${documentName}:`, err);
       }
-    }, (err) => {
-      console.error(`Error listening to ${documentName}:`, err);
-    });
+    );
+
     return unsubscribe;
   } catch (err) {
-    console.error(`Failed to set up listener for ${documentName}:`, err);
+    console.error(`[v0] ❌ Failed to set up listener for ${documentName}:`, err);
     return () => {};
   }
 }
 
-// Validate relationship connection on boot as mandated
-async function testConnection() {
+// Update document in RTDB (merge, don't replace)
+export async function updateDocument(documentName: string, data: any) {
   try {
-    await getDocFromServer(doc(db, "test", "connection"));
-  } catch (error) {
-    if (error instanceof Error && error.message.includes("the client is offline")) {
-      console.error("Please check your Firebase configuration.");
-    }
+    console.log(`[v0] Updating RTDB: ${documentName}`, data);
+    const dbRef = ref(rtdb, documentName);
+    await update(dbRef, data);
+    console.log(`[v0] ✅ Successfully updated ${documentName} in RTDB`);
+    return true;
+  } catch (err) {
+    console.error(`[v0] ❌ Error updating ${documentName}:`, err);
+    return false;
   }
 }
-testConnection();
+
+// Delete document from RTDB
+export async function deleteDocument(documentName: string) {
+  try {
+    console.log(`[v0] Deleting from RTDB: ${documentName}`);
+    const dbRef = ref(rtdb, documentName);
+    await remove(dbRef);
+    console.log(`[v0] ✅ Successfully deleted ${documentName} from RTDB`);
+    return true;
+  } catch (err) {
+    console.error(`[v0] ❌ Error deleting ${documentName}:`, err);
+    return false;
+  }
+}
