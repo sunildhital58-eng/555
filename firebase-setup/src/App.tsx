@@ -4,13 +4,13 @@ import {
   ChevronRight, ChevronDown, Users, Eye, Image, Play, Key, Calendar, ArrowRight, ShieldAlert,
   Download, Sparkles, MessageCircle, Heart, ThumbsUp, Trash2, ArrowUpRight, Lock, Facebook, Twitter, Linkedin, X, Search, CheckCircle2
 } from 'lucide-react';
-import { Services, Doctor, AboutUs, ForPatient, ForVisitors, GalleryItem, VideoItem, NewsItem, PriceListItem, ContactUsInfo, WebSettings, BookingRequest, TestimonialItem, HospitalEventItem, QRCodeItem, MachineItem } from './types';
+import { Services, Doctor, AboutUs, ForPatient, ForVisitors, GalleryItem, VideoItem, NewsItem, PriceListItem, ContactUsInfo, WebSettings, BookingRequest, TestimonialItem, HospitalEventItem, QRCodeItem, MachineItem, MailBox, HospitalMailSystem, StaffMember } from './types';
 import { DETAILED_PRICE_LIST } from './priceListData';
 import { 
   INITIAL_CATEGORIES, INITIAL_SERVICES, INITIAL_DOCTORS, INITIAL_ABOUT_US, 
   INITIAL_FOR_PATIENT, INITIAL_FOR_VISITORS, INITIAL_GALLERY, INITIAL_VIDEOS, 
   INITIAL_NEWS, INITIAL_PRICE_LIST, INITIAL_CONTACT, INITIAL_SETTINGS, INITIAL_BOOKINGS,
-  INITIAL_TESTIMONIALS, INITIAL_EVENTS, INITIAL_MACHINES, INITIAL_QR_CODES
+  INITIAL_TESTIMONIALS, INITIAL_EVENTS, INITIAL_MACHINES, INITIAL_QR_CODES, INITIAL_MAIL_SYSTEM, INITIAL_GIRLS_STAFF
 } from './seedData';
 import { getWhatsAppLink, parseVideoEmbed, getYouTubeThumbnail } from './utils';
 import { listenToDocument, saveDocument } from './firebase';
@@ -18,6 +18,7 @@ import MainNavbar from './components/MainNavbar';
 import BannerSlider from './components/BannerSlider';
 import InquiryModal from './components/InquiryModal';
 import Footer from './components/Footer';
+import StaffMailboxes from './components/StaffMailboxes';
 import AdminPanel from './components/AdminPanel';
 import NewsDetailModal from './components/NewsDetailModal';
 
@@ -58,6 +59,11 @@ export default function App() {
   const [doctors, setDoctors] = useState<Doctor[]>(() => {
     const saved = localStorage.getItem('dh_doctors');
     return saved ? JSON.parse(saved) : INITIAL_DOCTORS;
+  });
+
+  const [girlsStaff, setGirlsStaff] = useState<StaffMember[]>(() => {
+    const saved = localStorage.getItem('dh_girls_staff');
+    return saved ? JSON.parse(saved) : INITIAL_GIRLS_STAFF;
   });
 
   const [aboutUs, setAboutUs] = useState<AboutUs>(() => {
@@ -135,6 +141,8 @@ export default function App() {
     return saved ? JSON.parse(saved) : INITIAL_MACHINES;
   });
 
+  const [mailSystem, setMailSystem] = useState<HospitalMailSystem>(INITIAL_MAIL_SYSTEM);
+
   const [selectedMachineDashboard, setSelectedMachineDashboard] = useState<MachineItem | null>(null);
 
   // Prefill state for the online booking popup modal
@@ -175,6 +183,7 @@ export default function App() {
     unsubscribers.push(listenToDocument('categories', setCategories));
     unsubscribers.push(listenToDocument('services', setServices));
     unsubscribers.push(listenToDocument('doctors', setDoctors));
+    unsubscribers.push(listenToDocument('girlsStaff', setGirlsStaff));
     unsubscribers.push(listenToDocument('aboutUs', setAboutUs));
     unsubscribers.push(listenToDocument('patientData', setPatientData));
     unsubscribers.push(listenToDocument('visitorData', setVisitorData));
@@ -189,12 +198,44 @@ export default function App() {
     unsubscribers.push(listenToDocument('events', setEvents));
     unsubscribers.push(listenToDocument('qrCodes', setQrCodes));
     unsubscribers.push(listenToDocument('machines', setMachines));
+    unsubscribers.push(listenToDocument('mailSystem', setMailSystem));
 
     // Cleanup listeners on unmount
     return () => {
       unsubscribers.forEach(unsub => unsub());
     };
   }, []);
+
+  // Handle mailbox add/delete from website
+  useEffect(() => {
+    const handleAddMailbox = (e: any) => {
+      const newMailbox = e.detail;
+      const updated = {
+        ...mailSystem,
+        mailboxes: [...(mailSystem.mailboxes || []), newMailbox]
+      };
+      setMailSystem(updated);
+      saveToFirebase('mailSystem', updated);
+    };
+
+    const handleDeleteMailbox = (e: any) => {
+      const mailboxId = e.detail;
+      const updated = {
+        ...mailSystem,
+        mailboxes: (mailSystem.mailboxes || []).filter(m => m.id !== mailboxId)
+      };
+      setMailSystem(updated);
+      saveToFirebase('mailSystem', updated);
+    };
+
+    window.addEventListener('addMailbox', handleAddMailbox);
+    window.addEventListener('deleteMailbox', handleDeleteMailbox);
+
+    return () => {
+      window.removeEventListener('addMailbox', handleAddMailbox);
+      window.removeEventListener('deleteMailbox', handleDeleteMailbox);
+    };
+  }, [mailSystem]);
 
 
   // -------------------------------------------------------------
@@ -350,6 +391,8 @@ export default function App() {
         setQrCodes={setQrCodes}
         machines={machines}
         setMachines={setMachines}
+        girlsStaff={girlsStaff}
+        setGirlsStaff={setGirlsStaff}
         onExit={() => setIsAdminView(false)}
       />
     );
@@ -405,8 +448,8 @@ export default function App() {
                     </h3>
                     <p className="text-[10px] text-gray-400 font-semibold leading-tight">Instant-response patient service & health links</p>
                   </div>
-                  <span className="text-[9px] bg-red-100 text-red-600 font-black px-2 py-0.5 rounded-full uppercase tracking-wider animate-pulse">
-                    On-Call Support
+                  <span className="text-[9px] bg-emerald-100 text-emerald-600 font-black px-2 py-0.5 rounded-full uppercase tracking-wider animate-pulse">
+                    24/7 Emergency Support
                   </span>
                 </div>
 
@@ -442,9 +485,9 @@ export default function App() {
                     },
                     {
                       label: "Ambulance",
-                      icon: <Phone className="size-5 text-red-600 animate-bounce" />,
+                      icon: <Phone className="size-5 text-emerald-600 animate-bounce" />,
                       href: `tel:${contact.ambulancePhone || "9851000102"}`,
-                      color: "text-red-700 bg-red-50 border-red-100/50"
+                      color: "text-emerald-700 bg-emerald-50 border-emerald-100/50"
                     },
                     {
                       label: "WhatsApp",
@@ -644,7 +687,7 @@ export default function App() {
                   </p>
                 </div>
 
-                <div className="pt-4">
+                <div className="pt-4 space-y-2">
                   <a
                     href={getWhatsAppLink(aboutUs.chairmanMessage.whatsappNumber, aboutUs.chairmanMessage.name)}
                     target="_blank"
@@ -653,6 +696,13 @@ export default function App() {
                   >
                     <MessageCircle className="size-4 fill-emerald-800 text-white" />
                     Direct Chairman Chat
+                  </a>
+                  <a
+                    href={`mailto:${aboutUs.chairmanMessage.email || 'chairman@dhadinghospital.com.np'}`}
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs py-3 px-4 rounded-xl inline-flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs uppercase hover:scale-[1.01]"
+                  >
+                    <Mail className="size-4" />
+                    Send Email to Chairman
                   </a>
                 </div>
               </div>
@@ -1192,9 +1242,18 @@ export default function App() {
                             </h4>
                             <p className="text-xs text-gray-500 font-bold mt-0.5">Comprehensive wellness diagnostics profiles under specialized departments.</p>
                           </div>
-                          <span className="text-xs sm:text-sm bg-emerald-50 text-[#006830] font-black py-1.5 px-4 rounded-full border border-[#00A64C]/10 text-center shrink-0">
-                            ✓ 24/7 Priority Emergency Services
-                          </span>
+                          <div className="flex flex-col gap-2">
+                            <span className="text-xs sm:text-sm bg-emerald-50 text-[#006830] font-black py-1.5 px-4 rounded-full border border-[#00A64C]/10 text-center shrink-0">
+                              ✓ 24/7 Priority Emergency Services
+                            </span>
+                            <a
+                              href="mailto:pathology@dhadinghospital.com.np"
+                              className="text-xs sm:text-sm bg-emerald-600 hover:bg-emerald-700 text-white font-black py-1.5 px-4 rounded-full border border-emerald-700 text-center shrink-0 transition-colors cursor-pointer flex items-center gap-1 justify-center"
+                            >
+                              <Mail className="size-3" />
+                              Email Pathology
+                            </a>
+                          </div>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -2045,10 +2104,10 @@ export default function App() {
 ⏰ बुकिङ समय: ${meetTime}
 
 🏥 विभाग: ${meetDept || 'General Medicine'}
-🩺 विशेषज्ञ चिकित्सक: ${meetDocName || 'Specialist Officer'}
+🩺 विशेषज्ञ चिकित्��क: ${meetDocName || 'Specialist Officer'}
 ✉ बिरामीको गुनासो/लक्षण: ${meetMessage || 'N/A'}
 
-[यो बुकिङ अनुरोध अस्पतालको डिजिटल डेस्क वेबपेजबाट स्वचालित रूपमा तयार पारिएको हो। कृपया मेरो अपोइन्टमेन्ट समय निश्चित गरिदिनुहोला। ]`;
+[यो बुकिङ अनुरोध अस्पतालको डिजिटल डेस्क वेबपेजबाट स्वचालित रूपमा तयार पारिएको हो। कृपय����� मेरो अपोइन्टमेन्ट समय निश्चित गरिदिनुहोला। ]`;
 
                   const encodedText = encodeURIComponent(bookingText);
                   const waLink = `https://wa.me/${finalDoctorPhone}?text=${encodedText}`;
@@ -2290,6 +2349,45 @@ export default function App() {
               <h2 className="text-3xl font-black text-[#006830] relative pb-3 after:absolute after:bottom-0 after:left-0 after:h-1 after:w-20 after:bg-[#00A64C] tracking-tight">
                 Patient Appointment Guides & Files
               </h2>
+              
+              <div className="bg-slate-50 p-6 rounded-2xl border border-gray-200 space-y-4">
+                <p className="text-sm text-gray-700 leading-relaxed font-medium">
+                  We know that visits from friends and loved ones are important to patients. We give equal importance to visitor care and convenience as well. However, for the welfare of our patients, visitors and staff, we have devised the following schedule:
+                </p>
+
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse text-sm">
+                    <thead>
+                      <tr className="bg-[#006830] text-white">
+                        <th className="border border-gray-300 px-4 py-3 text-left font-black">Department</th>
+                        <th className="border border-gray-300 px-4 py-3 text-center font-black">Morning</th>
+                        <th className="border border-gray-300 px-4 py-3 text-center font-black">Afternoon</th>
+                        <th className="border border-gray-300 px-4 py-3 text-center font-black">Evening</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="hover:bg-green-50 transition-colors">
+                        <td className="border border-gray-300 px-4 py-3 font-semibold text-gray-800">Intensive Care Unit</td>
+                        <td className="border border-gray-300 px-4 py-3 text-center text-gray-700">8:00 to 8:30</td>
+                        <td className="border border-gray-300 px-4 py-3 text-center text-gray-700">2:00 to 2:30</td>
+                        <td className="border border-gray-300 px-4 py-3 text-center text-gray-700">8:00 to 8:30</td>
+                      </tr>
+                      <tr className="bg-gray-50 hover:bg-green-50 transition-colors">
+                        <td className="border border-gray-300 px-4 py-3 font-semibold text-gray-800">Post-operative Ward</td>
+                        <td className="border border-gray-300 px-4 py-3 text-center text-gray-700">8:00 to 8:30</td>
+                        <td className="border border-gray-300 px-4 py-3 text-center text-gray-700">3:00 to 3:30</td>
+                        <td className="border border-gray-300 px-4 py-3 text-center text-gray-700">8:00 to 8:30</td>
+                      </tr>
+                      <tr className="hover:bg-green-50 transition-colors">
+                        <td className="border border-gray-300 px-4 py-3 font-semibold text-gray-800">General Ward</td>
+                        <td className="border border-gray-300 px-4 py-3 text-center text-gray-700">7:30 to 8:00</td>
+                        <td className="border border-gray-300 px-4 py-3 text-center text-gray-700">11:30 to 12:00</td>
+                        <td className="border border-gray-300 px-4 py-3 text-center text-gray-700">4:30 to 5:00</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {patientData.appointment.map((apt) => (
@@ -2345,6 +2443,14 @@ export default function App() {
               <h2 className="text-3xl font-black text-[#006830] relative pb-3 after:absolute after:bottom-0 after:left-0 after:h-1 after:w-20 after:bg-[#00A64C] tracking-tight">
                 Hospital Rules & Regulations
               </h2>
+
+              <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+                <img 
+                  src="https://i.postimg.cc/pVm8JHjw/Whats-App-Image-2026-05-31-at-8-08-05-AM.jpg" 
+                  alt="Hospital Rules and Regulations" 
+                  className="w-full h-auto object-cover"
+                />
+              </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {visitorData.dosAndDonts.map((dd) => (
@@ -2860,6 +2966,13 @@ export default function App() {
             </div>
           );
         })()}
+
+        {/* Staff Mailboxes Tab View */}
+        {activeTab === 'mailboxes' && (
+          <div className="max-w-7xl mx-auto px-4 py-12">
+            <StaffMailboxes mailSystem={mailSystem} />
+          </div>
+        )}
 
         {/* Contact Tab View */}
         {activeTab === 'contact' && (

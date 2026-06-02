@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { 
   Building, Stethoscope, Users, Info, FileText, Eye, Image, Play, 
-  Settings, Key, Trash2, Edit, Plus, Check, ShieldAlert, LogOut, Phone, Mail, Calendar, EyeOff, X, Clock, MessageCircle, QrCode, ClipboardList
+  Settings, Key, Trash2, Edit, Plus, Check, ShieldAlert, LogOut, Phone, Mail, Calendar, EyeOff, X, Clock, MessageCircle, QrCode, ClipboardList, Send, Inbox, Reply
 } from 'lucide-react';
 import { 
   Services, Doctor, AboutUs, ForPatient, ForVisitors, GalleryItem, 
   VideoItem, NewsItem, PriceListItem, ContactUsInfo, WebSettings, BookingRequest, ServiceItem,
-  TestimonialItem, HospitalEventItem, QRCodeItem, MachineItem
+  TestimonialItem, HospitalEventItem, QRCodeItem, MachineItem, StaffMember
 } from '../types';
 import { saveDocument } from '../firebase';
 
@@ -47,6 +47,8 @@ interface AdminPanelProps {
   setQrCodes: React.Dispatch<React.SetStateAction<QRCodeItem[]>>;
   machines: MachineItem[];
   setMachines: React.Dispatch<React.SetStateAction<MachineItem[]>>;
+  girlsStaff: StaffMember[];
+  setGirlsStaff: React.Dispatch<React.SetStateAction<StaffMember[]>>;
   onExit: () => void;
 }
 
@@ -71,11 +73,30 @@ export default function AdminPanel({
   machines, setMachines,
   onExit
 }: AdminPanelProps) {
-  const [activeSubTab, setActiveSubTab] = useState<'bookings' | 'services' | 'doctors' | 'about' | 'patients' | 'visitors' | 'gallery' | 'news' | 'prices' | 'settings' | 'password' | 'testimonials' | 'events' | 'qrCodes' | 'machines'>('bookings');
+  const [activeSubTab, setActiveSubTab] = useState<'bookings' | 'services' | 'doctors' | 'about' | 'patients' | 'visitors' | 'gallery' | 'news' | 'prices' | 'settings' | 'password' | 'testimonials' | 'events' | 'qrCodes' | 'machines' | 'mailbox'>('bookings');
 
   // Save changes & Backup state managers
   const [isSaving, setIsSaving] = useState(false);
   const [saveStatus, setSaveStatus] = useState<{ text: string; isError: boolean } | null>(null);
+
+  // Mailbox helper states
+  const [mailSystem, setMailSystem] = useState(contact?.mailSystem || { 
+    mailboxes: [
+      { id: '1', name: 'Hospital Mailbox', email: 'info@dhadinghospital.com.np', password: 'hosp2024', messages: [] },
+      { id: '2', name: 'Chairman Mailbox', email: 'chairman@dhadinghospital.com.np', password: 'chair2024', messages: [] },
+      { id: '3', name: 'Reception Mailbox', email: 'reception@dhadinghospital.com.np', password: 'recep2024', messages: [] },
+      { id: '4', name: 'Account Mailbox', email: 'account@dhadinghospital.com.np', password: 'acct2024', messages: [] },
+      { id: '5', name: 'Pathology Mailbox', email: 'pathology@dhadinghospital.com.np', password: 'path2024', messages: [] },
+      { id: '6', name: 'Medical Director Mailbox', email: 'medicaldirector@dhadinghospital.com.np', password: 'med2024', messages: [] }
+    ]
+  });
+  const [selectedMailbox, setSelectedMailbox] = useState<any>(null);
+  const [mailboxComposeView, setMailboxComposeView] = useState(false);
+  const [composeForm, setComposeForm] = useState({ to: '', subject: '', message: '' });
+  const [selectedMessage, setSelectedMessage] = useState<any>(null);
+  const [editingMailbox, setEditingMailbox] = useState<any>(null);
+  const [editMailboxName, setEditMailboxName] = useState('');
+  const [editMailboxEmail, setEditMailboxEmail] = useState('');
 
   // Service helper states
   const [selectedServiceCategory, setSelectedServiceCategory] = useState<keyof Services>('opd');
@@ -398,6 +419,7 @@ export default function AdminPanel({
         saveDocument('categories', categories),
         saveDocument('services', services),
         saveDocument('doctors', doctors),
+        saveDocument('girlsStaff', girlsStaff),
         saveDocument('aboutUs', aboutUs),
         saveDocument('patientData', patientData),
         saveDocument('visitorData', visitorData),
@@ -454,7 +476,7 @@ export default function AdminPanel({
                 <Calendar className="size-4" /> Real-time Bookings
               </span>
               {bookings.length > 0 && (
-                <span className="bg-red-500 text-white font-mono font-bold px-1.5 py-0.5 rounded-full text-xs">
+                <span className="bg-[#00A64C] text-white font-mono font-bold px-1.5 py-0.5 rounded-full text-xs">
                   {bookings.length}
                 </span>
               )}
@@ -476,6 +498,15 @@ export default function AdminPanel({
               }`}
             >
               <Users className="size-4" /> Doctors & Departments
+            </button>
+
+            <button
+              onClick={() => setActiveSubTab('mailboxManager')}
+              className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors cursor-pointer ${
+                activeSubTab === 'mailboxManager' ? 'bg-[#00A64C] text-white' : 'hover:bg-gray-800'
+              }`}
+            >
+              <Mail className="size-4" /> Mailbox Manager
             </button>
 
             <button
@@ -578,6 +609,15 @@ export default function AdminPanel({
             </button>
 
             <button
+              onClick={() => setActiveSubTab('mailbox')}
+              className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors cursor-pointer ${
+                activeSubTab === 'mailbox' ? 'bg-[#00A64C] text-white' : 'hover:bg-gray-800'
+              }`}
+            >
+              <Mail className="size-4" /> Staff Mailbox System
+            </button>
+
+            <button
               onClick={() => setActiveSubTab('password')}
               className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors cursor-pointer ${
                 activeSubTab === 'password' ? 'bg-[#00A64C] text-white' : 'hover:bg-gray-800'
@@ -592,7 +632,7 @@ export default function AdminPanel({
         <div className="p-4 border-t border-gray-800 bg-[#161616]">
           <button
             onClick={onExit}
-            className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-sm cursor-pointer transition-colors"
+            className="w-full flex items-center justify-center gap-2 bg-[#00A64C] hover:bg-[#008C3E] text-white font-bold py-2 px-4 rounded-lg text-sm cursor-pointer transition-colors"
           >
             <LogOut className="size-4" /> Back to Hospital Web
           </button>
@@ -940,7 +980,7 @@ export default function AdminPanel({
                           2. Write each diagnostic test or checkup feature on its own **new line** below that.
                         </p>
                         <p className="italic font-bold text-[#00A64C]">
-                          नेपाली: पहिलो हरफमा `Price: Rs. ५,०००/-` लेख्नुहोस् र तल प्रत्येक लाइनमा फरक-फरक जाचँको नाम लेख्नुहोस्। ती जाचँहरु स्वतः Checkbox लिस्टमा देखिनेछन्।
+                          नेपाली: पहिलो हरफमा `Price: Rs. ५,०००/-` लेख्नुहोस् र तल प्रत्येक लाइनमा फरक-फरक जाचँको नाम लेख्नुहोस्। ती जाचँहरु स्वतः Checkbox लिस्टमा देखिनेछ��्���
                         </p>
                       </div>
                     )}
@@ -1272,6 +1312,175 @@ export default function AdminPanel({
                 )}
               </div>
 
+            </div>
+          </div>
+        )}
+
+        {/* Tab 3: Girls/Women Staff */}
+        {activeSubTab === 'mailboxManager' && (
+          <div className="space-y-6">
+            <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-xs">
+              <h3 className="text-[#006830] text-lg font-bold mb-2 flex items-center gap-2">
+                <Mail className="size-5 text-[#00A64C]" />
+                Mailbox Manager
+              </h3>
+              <p className="text-xs text-gray-500 pb-4">Add, edit, and manage department mailboxes. These will appear on the website for patients to contact different departments.</p>
+
+              {/* Add Mailbox Form */}
+              <form className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-4 mb-6">
+                <h4 className="text-xs uppercase font-extrabold text-gray-700 tracking-wider">➕ Add New Mailbox</h4>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    placeholder="Mailbox Name (e.g., Hospital Info, Chairman)"
+                    id="mailbox_name_admin"
+                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded bg-white focus:outline-none"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email Address (e.g., info@hospital.com)"
+                    id="mailbox_email_admin"
+                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded bg-white focus:outline-none"
+                  />
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    const name = (document.getElementById('mailbox_name_admin') as HTMLInputElement).value;
+                    const email = (document.getElementById('mailbox_email_admin') as HTMLInputElement).value;
+
+                    if (name && email) {
+                      const newMailbox = {
+                        id: Date.now().toString(),
+                        name,
+                        email,
+                        password: Math.random().toString(36).substring(2, 10),
+                        messages: []
+                      };
+
+                      setMailSystem(prev => ({
+                        ...prev,
+                        mailboxes: [...(prev.mailboxes || []), newMailbox]
+                      }));
+
+                      (document.getElementById('mailbox_name_admin') as HTMLInputElement).value = '';
+                      (document.getElementById('mailbox_email_admin') as HTMLInputElement).value = '';
+                      setSaveStatus({ text: 'Mailbox added! Click Save to persist changes.', isError: false });
+                    } else {
+                      setSaveStatus({ text: 'Please fill all fields', isError: true });
+                    }
+                  }}
+                  className="w-full bg-[#00A64C] hover:bg-[#006830] text-white px-4 py-2 rounded text-xs font-bold transition-colors cursor-pointer"
+                >
+                  Add Mailbox
+                </button>
+              </form>
+
+              {/* Mailbox Grid - Same style as website */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {mailSystem?.mailboxes && mailSystem.mailboxes.length > 0 ? (
+                  mailSystem.mailboxes.map(box => (
+                    <div key={box.id} className="bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 rounded-lg p-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Mail className="size-5 text-green-600" />
+                        <h4 className="font-bold text-gray-900 text-sm">{box.name}</h4>
+                      </div>
+                      <p className="text-xs text-gray-700 mb-3 break-all">{box.email}</p>
+                      <p className="text-xs text-gray-600 mb-3">Password: <span className="font-mono">••••••••</span></p>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => {
+                            setEditingMailbox(box);
+                            setEditMailboxName(box.name);
+                            setEditMailboxEmail(box.email);
+                          }}
+                          className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded text-xs font-bold transition-colors cursor-pointer"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => {
+                            setMailSystem(prev => ({
+                              ...prev,
+                              mailboxes: (prev.mailboxes || []).filter(m => m.id !== box.id)
+                            }));
+                            setSaveStatus({ text: 'Mailbox deleted! Click Save to persist changes.', isError: false });
+                          }}
+                          className="flex-1 bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded text-xs font-bold transition-colors cursor-pointer"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="col-span-full text-center py-8 text-gray-500">
+                    <Mail className="size-12 mx-auto mb-2 opacity-30" />
+                    <p className="text-sm">No mailboxes yet. Add one above!</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Edit Mailbox Modal */}
+              {editingMailbox && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+                  <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl">
+                    <h3 className="text-lg font-bold text-gray-900 mb-4">Edit Mailbox</h3>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-xs font-bold text-gray-700 mb-2">Mailbox Name</label>
+                        <input
+                          type="text"
+                          value={editMailboxName}
+                          onChange={(e) => setEditMailboxName(e.target.value)}
+                          className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                        />
+                      </div>
+                      
+                      <div>
+                        <label className="block text-xs font-bold text-gray-700 mb-2">Email Address</label>
+                        <input
+                          type="email"
+                          value={editMailboxEmail}
+                          onChange={(e) => setEditMailboxEmail(e.target.value)}
+                          className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                        />
+                      </div>
+
+                      <div className="flex gap-3 pt-4">
+                        <button
+                          onClick={() => {
+                            if (editMailboxName && editMailboxEmail) {
+                              setMailSystem(prev => ({
+                                ...prev,
+                                mailboxes: (prev.mailboxes || []).map(m =>
+                                  m.id === editingMailbox.id
+                                    ? { ...m, name: editMailboxName, email: editMailboxEmail }
+                                    : m
+                                )
+                              }));
+                              setEditingMailbox(null);
+                              setSaveStatus({ text: 'Mailbox updated! Click Save to persist changes.', isError: false });
+                            }
+                          }}
+                          className="flex-1 bg-[#00A64C] hover:bg-[#006830] text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors"
+                        >
+                          Save Changes
+                        </button>
+                        <button
+                          onClick={() => setEditingMailbox(null)}
+                          className="flex-1 bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg text-sm transition-colors"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -3291,6 +3500,231 @@ export default function AdminPanel({
                   Save Credential Directives
                 </button>
               </form>
+            </div>
+          </div>
+        )}
+
+        {/* Mailbox Management */}
+        {activeSubTab === 'mailbox' && (
+          <div className="space-y-6">
+            <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <Mail className="size-6 text-emerald-600" /> Staff Email Mailbox System
+              </h2>
+
+              <div className="grid md:grid-cols-4 gap-4">
+                {/* Mailbox Menu - Left Sidebar */}
+                <div className="md:col-span-1">
+                  <h3 className="font-bold text-sm text-gray-800 mb-3 px-2">Select Mailbox:</h3>
+                  <div className="space-y-2 bg-white rounded-lg p-2 border border-gray-200 max-h-96 overflow-y-auto">
+                    {mailSystem?.mailboxes && mailSystem.mailboxes.length > 0 ? (
+                      mailSystem.mailboxes.map((box) => (
+                      <button
+                        key={box.id}
+                        onClick={() => {
+                          const password = prompt(`Enter password for ${box.name}:`);
+                          if (password === box.password) {
+                            setSelectedMailbox(box);
+                            setMailboxComposeView(false);
+                            setSelectedMessage(null);
+                            setSaveStatus({ text: 'Mailbox unlocked!', isError: false });
+                          } else if (password !== null) {
+                            setSaveStatus({ text: 'Incorrect password!', isError: true });
+                          }
+                        }}
+                        className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                          selectedMailbox?.id === box.id
+                            ? 'bg-emerald-600 text-white shadow-md'
+                            : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-150'
+                        }`}
+                      >
+                        <div className="flex items-start gap-2 min-w-0">
+                          <Mail className="size-4 shrink-0 mt-0.5" />
+                          <div className="min-w-0">
+                            <div className="font-bold text-xs line-clamp-1">{box.name}</div>
+                            <div className="text-[10px] font-normal opacity-75 line-clamp-1">{box.email}</div>
+                          </div>
+                        </div>
+                      </button>
+                    ))
+                    ) : (
+                      <div className="p-4 text-center text-xs text-gray-500">
+                        No mailboxes available
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Mailbox Content - Right Side */}
+                <div className="md:col-span-3">
+                  {selectedMailbox ? (
+                    <div className="bg-white rounded-lg border border-gray-200 p-4 space-y-4">
+                      {/* Header */}
+                      <div className="flex items-center justify-between border-b border-gray-200 pb-3">
+                        <div>
+                          <h3 className="font-bold text-lg text-gray-900">{selectedMailbox.name}</h3>
+                          <p className="text-xs text-gray-500">{selectedMailbox.email}</p>
+                        </div>
+                        <button
+                          onClick={() => setMailboxComposeView(true)}
+                          className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition-colors cursor-pointer"
+                        >
+                          <Send className="size-4" /> Compose
+                        </button>
+                      </div>
+
+                      {/* Compose View */}
+                      {mailboxComposeView && (
+                        <div className="bg-slate-50 p-4 rounded-lg border border-gray-200 space-y-3">
+                          <h4 className="font-bold text-sm text-gray-800 flex items-center gap-2">
+                            <MessageCircle className="size-4" /> New Message
+                          </h4>
+                          <div className="space-y-3">
+                            <div>
+                              <label className="text-xs font-bold text-gray-700 block mb-1">To Email:</label>
+                              <input
+                                type="email"
+                                placeholder="recipient@example.com"
+                                value={composeForm.to}
+                                onChange={(e) => setComposeForm(prev => ({ ...prev, to: e.target.value }))}
+                                className="w-full px-3 py-2 text-xs border border-gray-200 rounded-lg focus:outline-none bg-white"
+                              />
+                            </div>
+                            <div>
+                              <label className="text-xs font-bold text-gray-700 block mb-1">Subject:</label>
+                              <input
+                                type="text"
+                                placeholder="Email subject"
+                                value={composeForm.subject}
+                                onChange={(e) => setComposeForm(prev => ({ ...prev, subject: e.target.value }))}
+                                className="w-full px-3 py-2 text-xs border border-gray-200 rounded-lg focus:outline-none bg-white"
+                              />
+                            </div>
+                            <div>
+                              <label className="text-xs font-bold text-gray-700 block mb-1">Message:</label>
+                              <textarea
+                                placeholder="Write your message here..."
+                                value={composeForm.message}
+                                onChange={(e) => setComposeForm(prev => ({ ...prev, message: e.target.value }))}
+                                className="w-full px-3 py-2 text-xs border border-gray-200 rounded-lg focus:outline-none bg-white h-24 resize-none"
+                              />
+                            </div>
+                          </div>
+                          <div className="flex gap-2 justify-end">
+                            <button
+                              onClick={() => {
+                                setMailboxComposeView(false);
+                                setComposeForm({ to: '', subject: '', message: '' });
+                              }}
+                              className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer"
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              onClick={() => {
+                                if (!composeForm.to || !composeForm.subject || !composeForm.message) {
+                                  setSaveStatus({ text: 'Please fill all fields', isError: true });
+                                  return;
+                                }
+                                const newMessage: EmailMessage = {
+                                  id: Date.now().toString(),
+                                  from: selectedMailbox.name,
+                                  fromEmail: selectedMailbox.email,
+                                  to: composeForm.to,
+                                  subject: composeForm.subject,
+                                  message: composeForm.message,
+                                  timestamp: Date.now(),
+                                  isRead: false
+                                };
+                                const updatedMailbox = {
+                                  ...selectedMailbox,
+                                  messages: [...(selectedMailbox.messages || []), newMessage]
+                                };
+                                setSelectedMailbox(updatedMailbox);
+                                const updatedSystem = {
+                                  ...mailSystem,
+                                  mailboxes: mailSystem.mailboxes.map(b => b.id === updatedMailbox.id ? updatedMailbox : b)
+                                };
+                                setMailSystem(updatedSystem);
+                                saveDocument('mailSystem', updatedSystem);
+                                setMailboxComposeView(false);
+                                setComposeForm({ to: '', subject: '', message: '' });
+                                setSaveStatus({ text: '✓ Email sent to ' + composeForm.to, isError: false });
+                              }}
+                              className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer"
+                            >
+                              Send Email
+                            </button>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Inbox List */}
+                      {!mailboxComposeView && !selectedMessage && (
+                        <div>
+                          <h4 className="font-bold text-sm text-gray-800 mb-3 flex items-center gap-2">
+                            <Inbox className="size-4" /> Inbox ({selectedMailbox.messages?.length || 0})
+                          </h4>
+                          {selectedMailbox.messages && selectedMailbox.messages.length > 0 ? (
+                            <div className="space-y-2 max-h-64 overflow-y-auto">
+                              {selectedMailbox.messages.map((msg) => (
+                                <button
+                                  key={msg.id}
+                                  onClick={() => setSelectedMessage(msg)}
+                                  className="w-full text-left p-3 border border-gray-150 rounded-lg hover:bg-gray-50 transition-colors"
+                                >
+                                  <div className="flex justify-between items-start gap-2">
+                                    <div className="flex-1 min-w-0">
+                                      <div className="font-semibold text-sm text-gray-900">{msg.subject}</div>
+                                      <div className="text-xs text-gray-500">From: {msg.fromEmail}</div>
+                                    </div>
+                                    <div className="text-xs text-gray-400 whitespace-nowrap">
+                                      {new Date(msg.timestamp).toLocaleDateString()}
+                                    </div>
+                                  </div>
+                                </button>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="text-center py-8 text-gray-400 text-sm">
+                              No emails yet. Compose your first email!
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Email View */}
+                      {selectedMessage && (
+                        <div className="bg-slate-50 p-4 rounded-lg border border-gray-200 space-y-3">
+                          <div className="flex items-center justify-between">
+                            <h4 className="font-bold text-sm text-gray-800">Email</h4>
+                            <button
+                              onClick={() => setSelectedMessage(null)}
+                              className="text-gray-500 hover:text-gray-700 text-lg"
+                            >
+                              ✕
+                            </button>
+                          </div>
+                          <div className="space-y-2 text-sm bg-white p-3 rounded border border-gray-150">
+                            <div><span className="font-bold">From:</span> {selectedMessage.fromEmail}</div>
+                            <div><span className="font-bold">To:</span> {selectedMessage.to}</div>
+                            <div><span className="font-bold">Subject:</span> {selectedMessage.subject}</div>
+                            <div><span className="font-bold">Date:</span> {new Date(selectedMessage.timestamp).toLocaleString()}</div>
+                            <div className="border-t pt-3 mt-3">
+                              <p className="whitespace-pre-wrap text-gray-700 text-xs leading-relaxed">{selectedMessage.message}</p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="bg-white rounded-lg border border-gray-200 p-8 text-center">
+                      <Mail className="size-12 mx-auto mb-4 text-gray-300" />
+                      <p className="text-gray-500 font-semibold">Select a mailbox to view messages</p>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         )}

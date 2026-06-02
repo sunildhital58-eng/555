@@ -7,6 +7,7 @@ export interface ServiceItem {
 }
 
 export interface Services {
+  visitTime: ServiceItem[];
   opd: ServiceItem[];
   ipd: ServiceItem[];
   emergency: ServiceItem[];
@@ -195,3 +196,45 @@ export interface HospitalEventItem {
   imageUrl?: string;
 }
 
+export interface MailBox {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  messages: EmailMessage[];
+  createdAt?: number;
+}
+
+export interface EmailMessage {
+  id: string;
+  from: string;
+  fromEmail: string;
+  to: string;
+  subject: string;
+  message: string;
+  timestamp: number;
+  isRead: boolean;
+}
+
+export interface HospitalMailSystem {
+  mailboxes: MailBox[];
+  defaultMailboxes: {
+    hospital: string;
+    chairman: string;
+    reception: string;
+    account: string;
+    pathology: string;
+    medicalDirector: string;
+  };
+}
+
+export interface StaffMember {
+  id: string;
+  name: string;
+  position: string;
+  department?: string;
+  photoUrl: string;
+  bio?: string;
+  phone?: string;
+  createdAt?: number;
+}
