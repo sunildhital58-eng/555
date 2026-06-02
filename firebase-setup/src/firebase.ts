@@ -7,30 +7,25 @@ import {
   getDocFromServer,
   onSnapshot
 } from "firebase/firestore";
+import { getDatabase, ref, onValue, set, remove } from "firebase/database";
 
-// Your web app's Firebase configuration
+// Firebase configuration for fir-1-cf2a6 project
 const firebaseConfig = {
-
   apiKey: "AIzaSyCdSbExPfnyL6mbZ-OPNarXucyq1fbkIRw",
-
-  authDomain: "myhospital-c7d91.firebaseapp.com",
-
-  projectId: "myhospital-c7d91",
-
-  storageBucket: "myhospital-c7d91.firebasestorage.app",
-
-  messagingSenderId: "53874820562",
-
-  appId: "1:53874820562:web:a793384bf1b6752b85740b",
-
-  measurementId: "G-BNEK48V7ZB"
-
+  authDomain: "fir-1-cf2a6.firebaseapp.com",
+  projectId: "fir-1-cf2a6",
+  storageBucket: "fir-1-cf2a6.firebasestorage.app",
+  databaseURL: "https://fir-1-cf2a6-default-rtdb.firebaseio.com",
+  messagingSenderId: "604655758683",
+  appId: "1:604655758683:web:d6eee8cc543a15bf21bb3e",
+  measurementId: "G-3BBP4WcNG"
 };
 
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
+export const rtdb = getDatabase(app);
 
 // Operational helper for error mapping and context defined in the skill
 export enum OperationType {
