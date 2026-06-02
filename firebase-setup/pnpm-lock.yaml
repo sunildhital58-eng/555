@@ -20,6 +20,9 @@ importers:
       dotenv:
         specifier: ^17.2.3
         version: 17.4.2
+      esbuild:
+        specifier: ^0.25.0
+        version: 0.25.12
       express:
         specifier: ^4.21.2
         version: 4.22.2
@@ -57,9 +60,6 @@ importers:
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.15)
-      esbuild:
-        specifier: ^0.25.0
-        version: 0.25.12
       tailwindcss:
         specifier: ^4.1.14
         version: 4.3.0
