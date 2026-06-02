@@ -397,20 +397,7 @@ export const INITIAL_SETTINGS: WebSettings = {
   seoDescription: "Dhading Hospital Pvt. Ltd. represents multi-speciality diagnosis, ICU beds, pediatric surgeons, gynecology, and rapid 24/7 emergency response networks in Dhading."
 };
 
-export const INITIAL_BOOKINGS: BookingRequest[] = [
-  {
-    id: 'b-mock-1',
-    patientName: 'Ram Bahadur Shrestha',
-    patientEmail: 'ram.shrestha@gmail.com',
-    patientNumber: '9841334455',
-    doctorType: 'Orthopedics, Trauma & Spine Surgery',
-    doctorName: 'Prof. Dr. Geha Raj Dahal',
-    day: 'Sunday',
-    time: 'Morning - 9 AM',
-    message: 'I have severe lower back spine discomfort after lifting heavy loads. Requesting examination.',
-    createdAt: '2026-05-31 01:00 AM'
-  }
-];
+export const INITIAL_BOOKINGS: BookingRequest[] = [];
 
 export const INITIAL_TESTIMONIALS: TestimonialItem[] = [
   {

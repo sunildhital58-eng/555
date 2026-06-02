@@ -647,7 +647,7 @@ export default function App() {
                   </p>
                 </div>
 
-                <div className="pt-4">
+                <div className="pt-4 space-y-2">
                   <a
                     href={getWhatsAppLink(aboutUs.chairmanMessage.whatsappNumber, aboutUs.chairmanMessage.name)}
                     target="_blank"
@@ -656,6 +656,13 @@ export default function App() {
                   >
                     <MessageCircle className="size-4 fill-emerald-800 text-white" />
                     Direct Chairman Chat
+                  </a>
+                  <a
+                    href={`mailto:${aboutUs.chairmanMessage.email || 'chairman@dhadinghospital.com.np'}`}
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs py-3 px-4 rounded-xl inline-flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs uppercase hover:scale-[1.01]"
+                  >
+                    <Mail className="size-4" />
+                    Send Email to Chairman
                   </a>
                 </div>
               </div>
@@ -1195,9 +1202,18 @@ export default function App() {
                             </h4>
                             <p className="text-xs text-gray-500 font-bold mt-0.5">Comprehensive wellness diagnostics profiles under specialized departments.</p>
                           </div>
-                          <span className="text-xs sm:text-sm bg-emerald-50 text-[#006830] font-black py-1.5 px-4 rounded-full border border-[#00A64C]/10 text-center shrink-0">
-                            ✓ 24/7 Priority Emergency Services
-                          </span>
+                          <div className="flex flex-col gap-2">
+                            <span className="text-xs sm:text-sm bg-emerald-50 text-[#006830] font-black py-1.5 px-4 rounded-full border border-[#00A64C]/10 text-center shrink-0">
+                              ✓ 24/7 Priority Emergency Services
+                            </span>
+                            <a
+                              href="mailto:pathology@dhadinghospital.com.np"
+                              className="text-xs sm:text-sm bg-emerald-600 hover:bg-emerald-700 text-white font-black py-1.5 px-4 rounded-full border border-emerald-700 text-center shrink-0 transition-colors cursor-pointer flex items-center gap-1 justify-center"
+                            >
+                              <Mail className="size-3" />
+                              Email Pathology
+                            </a>
+                          </div>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

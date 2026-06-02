@@ -3312,9 +3312,15 @@ export default function AdminPanel({
                       <button
                         key={box.id}
                         onClick={() => {
-                          setSelectedMailbox(box);
-                          setMailboxComposeView(false);
-                          setSelectedMessage(null);
+                          const password = prompt(`Enter password for ${box.name}:`);
+                          if (password === box.password) {
+                            setSelectedMailbox(box);
+                            setMailboxComposeView(false);
+                            setSelectedMessage(null);
+                            setSaveStatus({ text: 'Mailbox unlocked!', isError: false });
+                          } else if (password !== null) {
+                            setSaveStatus({ text: 'Incorrect password!', isError: true });
+                          }
                         }}
                         className={`w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold transition-all ${
                           selectedMailbox?.id === box.id
