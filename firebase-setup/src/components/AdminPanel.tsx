@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   Building, Stethoscope, Users, Info, FileText, Eye, Image, Play, 
-  Settings, Key, Trash2, Edit, Plus, Check, ShieldAlert, LogOut, Phone, Mail, Calendar, EyeOff, X, Clock, MessageCircle, QrCode, ClipboardList
+  Settings, Key, Trash2, Edit, Plus, Check, ShieldAlert, LogOut, Phone, Mail, Calendar, EyeOff, X, Clock, MessageCircle, QrCode, ClipboardList, Send, Inbox, Reply
 } from 'lucide-react';
 import { 
   Services, Doctor, AboutUs, ForPatient, ForVisitors, GalleryItem, 
@@ -76,6 +76,13 @@ export default function AdminPanel({
   // Save changes & Backup state managers
   const [isSaving, setIsSaving] = useState(false);
   const [saveStatus, setSaveStatus] = useState<{ text: string; isError: boolean } | null>(null);
+
+  // Mailbox helper states
+  const [mailSystem, setMailSystem] = useState(contact?.mailSystem || { mailboxes: [] });
+  const [selectedMailbox, setSelectedMailbox] = useState<any>(null);
+  const [mailboxComposeView, setMailboxComposeView] = useState(false);
+  const [composeForm, setComposeForm] = useState({ to: '', subject: '', message: '' });
+  const [selectedMessage, setSelectedMessage] = useState<any>(null);
 
   // Service helper states
   const [selectedServiceCategory, setSelectedServiceCategory] = useState<keyof Services>('opd');
@@ -3317,7 +3324,8 @@ export default function AdminPanel({
                 <div className="md:col-span-1">
                   <h3 className="font-bold text-sm text-gray-800 mb-3 px-2">Select Mailbox:</h3>
                   <div className="space-y-2 bg-white rounded-lg p-2 border border-gray-200 max-h-96 overflow-y-auto">
-                    {mailSystem.mailboxes.map((box) => (
+                    {mailSystem?.mailboxes && mailSystem.mailboxes.length > 0 ? (
+                      mailSystem.mailboxes.map((box) => (
                       <button
                         key={box.id}
                         onClick={() => {
@@ -3345,13 +3353,18 @@ export default function AdminPanel({
                           </div>
                         </div>
                       </button>
-                    ))}
+                    ))
+                    ) : (
+                      <div className="p-4 text-center text-xs text-gray-500">
+                        No mailboxes available
+                      </div>
+                    )}
                   </div>
                 </div>
 
                 {/* Mailbox Content - Right Side */}
                 <div className="md:col-span-3">
-                  {selectedMailbox && (
+                  {selectedMailbox ? (
                     <div className="bg-white rounded-lg border border-gray-200 p-4 space-y-4">
                       {/* Header */}
                       <div className="flex items-center justify-between border-b border-gray-200 pb-3">
@@ -3510,6 +3523,11 @@ export default function AdminPanel({
                           </div>
                         </div>
                       )}
+                    </div>
+                  ) : (
+                    <div className="bg-white rounded-lg border border-gray-200 p-8 text-center">
+                      <Mail className="size-12 mx-auto mb-4 text-gray-300" />
+                      <p className="text-gray-500 font-semibold">Select a mailbox to view messages</p>
                     </div>
                   )}
                 </div>
