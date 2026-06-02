@@ -403,7 +403,7 @@ export const INITIAL_CONTACT: ContactUsInfo = {
 };
 
 export const INITIAL_SETTINGS: WebSettings = {
-  webName: "Dhading Hospital Pvt. Ltd.",
+  webName: "Dhading Hospital Pvt Ltd",
   logoUrl: "https://i.postimg.cc/Gpvz8KXz/Whats-App-Image-2026-05-31-at-3-22-33-AM.jpg",
   banners: [
     {
