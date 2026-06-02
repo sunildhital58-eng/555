@@ -373,8 +373,8 @@ export default function App() {
         {activeTab === 'home' && (
           <div className="space-y-12 pb-16">
             
-            {/* Slideshow */}
-            <BannerSlider banners={settings.banners} />
+            {/* Slideshow - Temporarily hidden */}
+            {/* <BannerSlider banners={settings.banners} /> */}
 
             {/* MOBILE ONLY SMART PORTAL QUICK ACCESS HUB */}
             <section className="lg:hidden px-4 -mt-8 relative z-20">
@@ -2035,7 +2035,7 @@ export default function App() {
                   
 📋 मेरो विवरण निम्नलिखित छ:
 ----------------------------------
-👤 बिरामीको नाम: ${meetPatientName}
+👤 बिराम��को नाम: ${meetPatientName}
 📞 सम्पर्क फोन नम्बर: ${meetContact}
 💬 व्हाट्सएप नम्बर: ${meetWhatsapp}
 📍 ठेगाना: ${meetAddress}

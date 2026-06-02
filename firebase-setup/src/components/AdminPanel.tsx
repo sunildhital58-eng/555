@@ -118,13 +118,118 @@ export default function AdminPanel({
   // General helpers for items
   const [selectedBooking, setSelectedBooking] = useState<BookingRequest | null>(null);
 
-  // Auto-save mailSystem to Firebase RTDB when it changes
+  // Auto-save all data to Firebase RTDB when any state changes
+  useEffect(() => {
+    if (categories.length > 0) {
+      saveDocument('categories', categories).catch(err => console.error('[v0] Error saving categories:', err));
+    }
+  }, [categories]);
+
+  useEffect(() => {
+    if (services) {
+      saveDocument('services', services).catch(err => console.error('[v0] Error saving services:', err));
+    }
+  }, [services]);
+
+  useEffect(() => {
+    if (doctors.length > 0) {
+      saveDocument('doctors', doctors).catch(err => console.error('[v0] Error saving doctors:', err));
+    }
+  }, [doctors]);
+
+  useEffect(() => {
+    if (girlsStaff.length > 0) {
+      saveDocument('girlsStaff', girlsStaff).catch(err => console.error('[v0] Error saving girlsStaff:', err));
+    }
+  }, [girlsStaff]);
+
+  useEffect(() => {
+    if (aboutUs) {
+      saveDocument('aboutUs', aboutUs).catch(err => console.error('[v0] Error saving aboutUs:', err));
+    }
+  }, [aboutUs]);
+
+  useEffect(() => {
+    if (patientData) {
+      saveDocument('patientData', patientData).catch(err => console.error('[v0] Error saving patientData:', err));
+    }
+  }, [patientData]);
+
+  useEffect(() => {
+    if (visitorData) {
+      saveDocument('visitorData', visitorData).catch(err => console.error('[v0] Error saving visitorData:', err));
+    }
+  }, [visitorData]);
+
+  useEffect(() => {
+    if (gallery.length > 0) {
+      saveDocument('gallery', gallery).catch(err => console.error('[v0] Error saving gallery:', err));
+    }
+  }, [gallery]);
+
+  useEffect(() => {
+    if (videos.length > 0) {
+      saveDocument('videos', videos).catch(err => console.error('[v0] Error saving videos:', err));
+    }
+  }, [videos]);
+
+  useEffect(() => {
+    if (news.length > 0) {
+      saveDocument('news', news).catch(err => console.error('[v0] Error saving news:', err));
+    }
+  }, [news]);
+
+  useEffect(() => {
+    if (priceList.length > 0) {
+      saveDocument('priceList', priceList).catch(err => console.error('[v0] Error saving priceList:', err));
+    }
+  }, [priceList]);
+
+  useEffect(() => {
+    if (contact) {
+      saveDocument('contact', contact).catch(err => console.error('[v0] Error saving contact:', err));
+    }
+  }, [contact]);
+
+  useEffect(() => {
+    if (settings) {
+      saveDocument('settings', settings).catch(err => console.error('[v0] Error saving settings:', err));
+    }
+  }, [settings]);
+
+  useEffect(() => {
+    if (bookings.length > 0) {
+      saveDocument('bookings', bookings).catch(err => console.error('[v0] Error saving bookings:', err));
+    }
+  }, [bookings]);
+
+  useEffect(() => {
+    if (testimonials.length > 0) {
+      saveDocument('testimonials', testimonials).catch(err => console.error('[v0] Error saving testimonials:', err));
+    }
+  }, [testimonials]);
+
+  useEffect(() => {
+    if (events.length > 0) {
+      saveDocument('events', events).catch(err => console.error('[v0] Error saving events:', err));
+    }
+  }, [events]);
+
+  useEffect(() => {
+    if (qrCodes.length > 0) {
+      saveDocument('qrCodes', qrCodes).catch(err => console.error('[v0] Error saving qrCodes:', err));
+    }
+  }, [qrCodes]);
+
+  useEffect(() => {
+    if (machines.length > 0) {
+      saveDocument('machines', machines).catch(err => console.error('[v0] Error saving machines:', err));
+    }
+  }, [machines]);
+
   useEffect(() => {
     if (mailSystem?.mailboxes) {
-      console.log('[v0] mailSystem changed, saving to RTDB:', mailSystem);
-      saveDocument('mailSystem', mailSystem).catch(err => {
-        console.error('[v0] Error saving mailSystem:', err);
-      });
+      saveDocument('mailSystem', mailSystem).catch(err => console.error('[v0] Error saving mailSystem:', err));
     }
   }, [mailSystem]);
 
