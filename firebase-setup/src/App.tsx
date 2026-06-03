@@ -13,7 +13,6 @@ import {
   INITIAL_TESTIMONIALS, INITIAL_EVENTS, INITIAL_MACHINES, INITIAL_QR_CODES, INITIAL_MAIL_SYSTEM, INITIAL_GIRLS_STAFF
 } from './seedData';
 import { getWhatsAppLink, parseVideoEmbed, getYouTubeThumbnail } from './utils';
-import { listenToDocument, saveDocument } from './firebase';
 import MainNavbar from './components/MainNavbar';
 import BannerSlider from './components/BannerSlider';
 import InquiryModal from './components/InquiryModal';
