@@ -8,7 +8,6 @@ import {
   VideoItem, NewsItem, PriceListItem, ContactUsInfo, WebSettings, BookingRequest, ServiceItem,
   TestimonialItem, HospitalEventItem, QRCodeItem, MachineItem, StaffMember
 } from '../types';
-import { saveDocument } from '../firebase';
 
 interface AdminPanelProps {
   categories: string[];
@@ -118,31 +117,7 @@ export default function AdminPanel({
   // General helpers for items
   const [selectedBooking, setSelectedBooking] = useState<BookingRequest | null>(null);
 
-  // Single combined auto-save effect instead of 20 individual ones
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (categories.length > 0) saveDocument('categories', categories).catch(() => {});
-      if (services) saveDocument('services', services).catch(() => {});
-      if (doctors.length > 0) saveDocument('doctors', doctors).catch(() => {});
-      if (girlsStaff.length > 0) saveDocument('girlsStaff', girlsStaff).catch(() => {});
-      if (aboutUs) saveDocument('aboutUs', aboutUs).catch(() => {});
-      if (patientData) saveDocument('patientData', patientData).catch(() => {});
-      if (visitorData) saveDocument('visitorData', visitorData).catch(() => {});
-      if (gallery.length > 0) saveDocument('gallery', gallery).catch(() => {});
-      if (videos.length > 0) saveDocument('videos', videos).catch(() => {});
-      if (news.length > 0) saveDocument('news', news).catch(() => {});
-      if (priceList.length > 0) saveDocument('priceList', priceList).catch(() => {});
-      if (contact) saveDocument('contact', contact).catch(() => {});
-      if (settings) saveDocument('settings', settings).catch(() => {});
-      if (bookings.length > 0) saveDocument('bookings', bookings).catch(() => {});
-      if (testimonials.length > 0) saveDocument('testimonials', testimonials).catch(() => {});
-      if (events.length > 0) saveDocument('events', events).catch(() => {});
-      if (qrCodes.length > 0) saveDocument('qrCodes', qrCodes).catch(() => {});
-      if (machines.length > 0) saveDocument('machines', machines).catch(() => {});
-      if (mailSystem?.mailboxes) saveDocument('mailSystem', mailSystem).catch(() => {});
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [categories, services, doctors, girlsStaff, aboutUs, patientData, visitorData, gallery, videos, news, priceList, contact, settings, bookings, testimonials, events, qrCodes, machines, mailSystem]);
+  // No database persistence - UI only
 
   // About us helper lists
   const [bodName, setBodName] = useState('');
@@ -442,24 +417,24 @@ export default function AdminPanel({
 
       // Save each collection to Firestore for real-time sync across all devices
       await Promise.all([
-        saveDocument('categories', categories),
-        saveDocument('services', services),
-        saveDocument('doctors', doctors),
-        saveDocument('girlsStaff', girlsStaff),
-        saveDocument('aboutUs', aboutUs),
-        saveDocument('patientData', patientData),
-        saveDocument('visitorData', visitorData),
-        saveDocument('gallery', gallery),
-        saveDocument('videos', videos),
-        saveDocument('news', news),
-        saveDocument('priceList', priceList),
-        saveDocument('contact', contact),
-        saveDocument('settings', settings),
-        saveDocument('bookings', bookings),
-        saveDocument('testimonials', testimonials),
-        saveDocument('events', events),
-        saveDocument('qrCodes', qrCodes),
-        saveDocument('machines', machines)
+        // saveDocument('categories', categories),
+        // saveDocument('services', services),
+        // saveDocument('doctors', doctors),
+        // saveDocument('girlsStaff', girlsStaff),
+        // saveDocument('aboutUs', aboutUs),
+        // saveDocument('patientData', patientData),
+        // saveDocument('visitorData', visitorData),
+        // saveDocument('gallery', gallery),
+        // saveDocument('videos', videos),
+        // saveDocument('news', news),
+        // saveDocument('priceList', priceList),
+        // saveDocument('contact', contact),
+        // saveDocument('settings', settings),
+        // saveDocument('bookings', bookings),
+        // saveDocument('testimonials', testimonials),
+        // saveDocument('events', events),
+        // saveDocument('qrCodes', qrCodes),
+        // saveDocument('machines', machines)
       ]);
 
       setSaveStatus({ text: '🚀 SUCCESS: All changes synced to Firebase! All devices (web, mobile, tablets) will see updates in real-time!', isError: false });
@@ -3672,7 +3647,7 @@ export default function AdminPanel({
                                   mailboxes: mailSystem.mailboxes.map(b => b.id === updatedMailbox.id ? updatedMailbox : b)
                                 };
                                 setMailSystem(updatedSystem);
-                                saveDocument('mailSystem', updatedSystem);
+                                // saveDocument('mailSystem', updatedSystem);
                                 setMailboxComposeView(false);
                                 setComposeForm({ to: '', subject: '', message: '' });
                                 setSaveStatus({ text: '✓ Email sent to ' + composeForm.to, isError: false });
