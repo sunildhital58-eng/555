@@ -8,6 +8,7 @@ import {
   VideoItem, NewsItem, PriceListItem, ContactUsInfo, WebSettings, BookingRequest, ServiceItem,
   TestimonialItem, HospitalEventItem, QRCodeItem, MachineItem, StaffMember
 } from '../types';
+import { saveDocument } from '../firebase';
 
 interface AdminPanelProps {
   categories: string[];
