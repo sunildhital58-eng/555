@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Building, Stethoscope, Users, Info, FileText, Eye, Image, Play, 
   Settings, Key, Trash2, Edit, Plus, Check, ShieldAlert, LogOut, Phone, Mail, Calendar, EyeOff, X, Clock, MessageCircle, QrCode, ClipboardList, Send, Inbox, Reply
@@ -117,6 +117,8 @@ export default function AdminPanel({
 
   // General helpers for items
   const [selectedBooking, setSelectedBooking] = useState<BookingRequest | null>(null);
+
+  // No database persistence - UI only
 
   // About us helper lists
   const [bodName, setBodName] = useState('');
@@ -416,24 +418,24 @@ export default function AdminPanel({
 
       // Save each collection to Firestore for real-time sync across all devices
       await Promise.all([
-        saveDocument('categories', categories),
-        saveDocument('services', services),
-        saveDocument('doctors', doctors),
-        saveDocument('girlsStaff', girlsStaff),
-        saveDocument('aboutUs', aboutUs),
-        saveDocument('patientData', patientData),
-        saveDocument('visitorData', visitorData),
-        saveDocument('gallery', gallery),
-        saveDocument('videos', videos),
-        saveDocument('news', news),
-        saveDocument('priceList', priceList),
-        saveDocument('contact', contact),
-        saveDocument('settings', settings),
-        saveDocument('bookings', bookings),
-        saveDocument('testimonials', testimonials),
-        saveDocument('events', events),
-        saveDocument('qrCodes', qrCodes),
-        saveDocument('machines', machines)
+        // saveDocument('categories', categories),
+        // saveDocument('services', services),
+        // saveDocument('doctors', doctors),
+        // saveDocument('girlsStaff', girlsStaff),
+        // saveDocument('aboutUs', aboutUs),
+        // saveDocument('patientData', patientData),
+        // saveDocument('visitorData', visitorData),
+        // saveDocument('gallery', gallery),
+        // saveDocument('videos', videos),
+        // saveDocument('news', news),
+        // saveDocument('priceList', priceList),
+        // saveDocument('contact', contact),
+        // saveDocument('settings', settings),
+        // saveDocument('bookings', bookings),
+        // saveDocument('testimonials', testimonials),
+        // saveDocument('events', events),
+        // saveDocument('qrCodes', qrCodes),
+        // saveDocument('machines', machines)
       ]);
 
       setSaveStatus({ text: '🚀 SUCCESS: All changes synced to Firebase! All devices (web, mobile, tablets) will see updates in real-time!', isError: false });
@@ -3646,7 +3648,7 @@ export default function AdminPanel({
                                   mailboxes: mailSystem.mailboxes.map(b => b.id === updatedMailbox.id ? updatedMailbox : b)
                                 };
                                 setMailSystem(updatedSystem);
-                                saveDocument('mailSystem', updatedSystem);
+                                // saveDocument('mailSystem', updatedSystem);
                                 setMailboxComposeView(false);
                                 setComposeForm({ to: '', subject: '', message: '' });
                                 setSaveStatus({ text: '✓ Email sent to ' + composeForm.to, isError: false });
